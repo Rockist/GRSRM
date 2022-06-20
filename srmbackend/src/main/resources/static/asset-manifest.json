@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0bc7da3e.css",
+    "main.js": "/static/js/main.6d72a960.js",
+    "static/media/MalgunGothic.eot": "/static/media/MalgunGothic.6d21393bcaff98271370.eot",
+    "static/media/webscript.png": "/static/media/webscript.6cc399e1674b94895a81.png",
+    "index.html": "/index.html",
+    "main.0bc7da3e.css.map": "/static/css/main.0bc7da3e.css.map",
+    "main.6d72a960.js.map": "/static/js/main.6d72a960.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0bc7da3e.css",
+    "static/js/main.6d72a960.js"
+  ]
+}
