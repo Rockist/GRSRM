@@ -11,16 +11,11 @@
 }
 
 .container {
+    page-break-after: always; /* print 시에 페이지 짤라 주는 역할 얘없으면 안됩니다. */
     position: relative;
-    page-break-after:always;
     background-color: #fff;
     width: 1000px;
 }
-
-.container-wrapper {
-    padding-top: 10px;
-}
-
 
 .close {
     text-align: end;
@@ -44,6 +39,7 @@ pre {
 /* 네비게이션 부분 */
 .nav {
     display: flex;
+    margin-top: 19.8px;
     justify-content: space-between;
 }
 
@@ -96,10 +92,14 @@ pre {
     width: 100%;
     border-collapse: collapse;
     border: 2px solid black;
+    height: 90px;
 }
 
-.confirm_container td,  .confirm_container th{
-    border-collapse: collapse;
+.confirm_container .ct_r2 {
+    height: 70px;
+}
+
+.confirm_container td, .confirm_container th {
     border: 1px solid black;
 }
 
@@ -109,20 +109,30 @@ pre {
     width: 100%;
 }
 
-.supplyer_container table {
-    font-size: 14px;
+.supplyer_container > table {
+    font-size: 11px;
     border-collapse: collapse;
     border: 2px solid black;
     width: 100%;
 }
 
 .supplyer_container pre {
-    font-size: 14px;
+    font-size: 11px;
 }
 
-.supplyer_container table td {
+.supplyer_container td {
+    font-size: 11px;
+    height: 25px;
     padding: 2px;
     border: 1px solid black;
+}
+
+.supplyer_container #t_rec_name {
+    font-size: 13px;
+}
+
+.supplyer_container #t_sen_name {
+    font-size: 13px;
 }
 
 tr #address {
@@ -272,3 +282,4 @@ tr #address {
         display: none;
     }
 }
+

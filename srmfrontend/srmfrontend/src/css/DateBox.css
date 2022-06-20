@@ -1,0 +1,8 @@
+.date-picker-wrapper {
+  overflow: hidden;
+  clear: both;
+}
+
+.datepicker-title {
+  width: 100px;
+}

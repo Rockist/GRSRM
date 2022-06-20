@@ -85,10 +85,11 @@ public class SRM204PreviewDto {
         }
 
         private String filterData(DecimalFormat format, List<SRM204WPreviewSpDao> nestedList, CommonInterface commonInterface) {
-            return format.format(nestedList.stream()
+            String result = format.format(nestedList.stream()
                     .map(commonInterface::useDecimal)
                     .reduce(BigDecimal::add)
                     .get());
+            return result.equals(".00") ? "0.00" : result;
         }
     }
 }
