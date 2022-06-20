@@ -1,0 +1,272 @@
+#modal {
+    width: 100;
+    height: 100%;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.container-wrapper {
+    padding-top: 10px;
+}
+
+.container {
+    position: relative;
+    background-color: #fff;
+    width: 1000px;
+}
+
+.close {
+    text-align: end;
+}
+
+/* 전역 */
+pre {
+    font-size: 1rem;
+    display: inline;
+}
+
+.t_center {
+    text-align: center;
+}
+
+.t_right {
+    text-align: right;
+}
+
+
+/* 네비게이션 부분 */
+.nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delivery_date_container {
+    align-self: flex-end;
+    width: 250px;
+    text-align: left;
+}
+
+.delivery_date_container>table {
+    width: 100%;
+}
+
+.delivery_date_td {
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+}
+
+.title_container {
+    text-align: center;
+    width: 400px;
+}
+
+.title_container > .title_name {
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+.title_container > .sp {
+    margin-top: 5px;
+    font-size: 1.2rem;
+}
+
+.title_container > .barcode {
+    height: 40px;
+    line-height: 40px;
+}
+
+.confirm_container {
+    display: flex;
+    justify-content: end;
+    align-self: flex-end;
+    width: 300px;
+    height: 100px;
+}
+
+.confirm_container > table {
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+.confirm_container td,  .confirm_container th{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+/* 공급자 부분 */
+.supplyer_container {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.supplyer_container table {
+    font-size: 14px;
+    border-collapse: collapse;
+    border: 2px solid black;
+    width: 100%;
+}
+
+.supplyer_container pre {
+    font-size: 14px;
+}
+
+.supplyer_container table td {
+    padding: 2px;
+    border: 1px solid black;
+}
+
+tr #address {
+    font-size: 0.7rem;
+}
+
+.td_work {
+    font-size: 10px;
+}
+
+.ts_width {
+    width: 150px;
+}
+
+/* 콘텐츠 영역 */
+.contents_container {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.contents_container table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.contents_container th {
+    font-size: 14px;
+    border: 1px solid black;
+    font-weight: 400;
+}
+
+.contents_container #no {
+    width: 4%;
+}
+
+.contents_container #name {
+    width: 24%;
+}
+
+.contents_container #standard {
+    width: 14%;
+}
+
+.contents_container #unit {
+    width: 4%;
+}
+
+.contents_container #width {
+    width: 12%;
+}
+
+.contents_container #roll {
+    width: 6%;
+}
+
+.contents_container #scrab {
+    width: 8%;
+}
+
+.contents_container #unit_price {
+    width: 12%;
+}
+
+.contents_container #price {
+    width: 16%;
+}
+
+.contents_container pre {
+    font-size: 14px;
+}
+
+.contents_container td {
+    font-size: 14px;
+    border: 1px solid black;
+}
+
+.t_number {
+    text-align: center;
+    height: 24px;
+}
+
+/* footer 영역 */
+.footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.footer table {
+    font-size: 12px;
+    border-collapse: collapse;
+}
+
+.footer .f_ta_1 {
+    width: 50%;
+}
+
+.footer .f_ta_1 tr {
+    height: 60px;
+}
+
+.footer .f_ta_2 {
+    width: 50%;
+}
+
+.footer .f_ta_2 tr {
+    height: 40px;
+}
+
+.footer td {
+    font-size: 12px;
+    border: 2px solid black;
+}
+
+.footer .footer_price {
+    text-align: center;
+    border-left: none;
+}
+
+.footer pre {
+    font-size: 12px;
+}
+
+.f1_width {
+    padding-right: 40px;
+    text-align: end;
+    width: 410px;
+}
+
+.f2_width {
+    text-align: right;
+    width: 340px;
+}
+
+.add_price {
+    width: 100%;
+}
+
+@media print{
+    @page {
+        size: A4 portrait;
+        margin:1cm;
+    }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}

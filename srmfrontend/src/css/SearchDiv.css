@@ -1,0 +1,31 @@
+.conditions-wrapper {
+  min-width: 500px;
+  width: 100%;
+  /* border: 1px solid black; */
+  background-color: rgb(220, 220, 220);
+  padding: 5px;
+}
+
+.conditions-box-half {
+  min-width: 20px;
+  width: 50%;
+  /* border: 1px solid black; */
+  vertical-align: baseline;
+  display: inline-block;
+  line-height: 28px;
+  padding-left: 30px;
+}
+
+.conditions-box {
+  min-width: 500px;
+  width: 50%;
+  /* border: 1px solid black; */
+  vertical-align: baseline;
+  display: inline-block;
+  line-height: 28px;
+  padding-left: 30px;
+}
+
+.btn-conditions {
+  line-height: 10px;
+}
