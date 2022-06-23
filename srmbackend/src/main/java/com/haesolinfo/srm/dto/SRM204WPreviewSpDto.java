@@ -5,9 +5,11 @@ import com.haesolinfo.srm.dao.SRM204WPreviewSpDao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.DecimalFormat;
 
@@ -63,14 +65,19 @@ public class SRM204WPreviewSpDto {
         setITEM_NM(dao.getITEM_NM());
         setSPEC(dao.getSPEC());
         setBASIC_UNIT(dao.getBASIC_UNIT());
-        setDLVY_QTY(format_2.format(dao.getDLVY_QTY()));
-        setDLVY_ROLL(format_2.format(dao.getDLVY_ROLL()));
-        setSCRAP_QTY(format_2.format(dao.getSCRAP_QTY()));
-        setITEM_PRICE(format_1.format(dao.getITEM_PRICE()));
-        setAMT(format_1.format(dao.getAMT()));
+        setDLVY_QTY(format(format_2, dao.getDLVY_QTY()));
+        setDLVY_ROLL(format(format_2, dao.getDLVY_ROLL()));
+        setSCRAP_QTY(format(format_2, dao.getSCRAP_QTY()));
+        setITEM_PRICE(format(format_1, dao.getITEM_PRICE()));
+        setAMT(format(format_1, dao.getAMT()));
         setLOT_NO(dao.getLOT_NO());
         setCUST_CD(dao.getCUST_CD());
         setCNT2(dao.getCNT2());
         return this;
+    }
+
+    private String format(DecimalFormat format, BigDecimal data) {
+        String result = format.format(data);
+        return result.equals(".00") ? "0.00" : result;
     }
 }

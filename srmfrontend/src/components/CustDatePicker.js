@@ -15,7 +15,7 @@ const CustDatePicker = (props) => {
   return (
     <div className="calender-container">
       <div className="calender-box">
-        <div className="datepicker-items">{dateTitle}&nbsp;</div>
+        <div className="datepicker-items" id="datepicker-items-title">{dateTitle}&nbsp;</div>
         <div className="datepicker-items">
           <MyDatePicker
             selected={startDate}

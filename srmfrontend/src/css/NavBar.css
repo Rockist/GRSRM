@@ -1,5 +1,6 @@
 .nav-container {
-  min-width: 1660px;
+  overflow: hidden;
+  width: 100%;
   padding: 0 20px;
   background-color: rgb(255, 247, 247);
   font-family: Arial, Helvetica, sans-serif;
@@ -12,14 +13,13 @@
 }
 
 .btn-nav {
-  width: 100px;
+  width: 10%;
   height: 35px;
   line-height: 35px;
 
   text-align: center;
   font-size: 1rem;
   display: inline-block;
-  margin: 0 20px;
 
   -ms-user-select: none;
   -moz-user-select: -moz-none;

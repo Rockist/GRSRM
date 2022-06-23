@@ -1,0 +1,20 @@
+.fileupload-form {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+}
+
+.fileupload-form > .form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fileupload-form > .form > .txt-upload {
+    flex: 1;
+    background-color: tomato;
+}
+
+.fileupload-form > .form > .btn-upload {
+    margin-left: 10px;
+}

@@ -1,6 +1,7 @@
 .mainContainer {
-  min-width: 1640px;
+  min-width: 100%;
   height: 87.5vh;
+  clear: both;
   background-color: rgb(240, 240, 240);
   padding: 5px;
 }
@@ -12,74 +13,84 @@
 }
 
 .right-container {
-  min-width: 810px;
+  min-width: 50%;
   padding-left: 5px;
   width: 50%;
-  float: right;
+  float: left;
   box-sizing: border-box;
 }
 
 .content-wrapper {
-  width: 810x;
-  height: 30px;
-  vertical-align: baseline;
-  display: inline-block;
-  line-height: 28px;
-  padding-left: 30px;
+  width: 100%;
+  height: 100px;
+  place-items: center;
 }
 
-.content-box-grid {
-  min-width: 800px;
+.content-wrapper > .content-file {
+  width: 100%;
+  display: flex;
+  place-items: center;
+  justify-content: space-between;
 }
 
-.content-box {
-  min-width: 20px;
-  width: 50%;
-  /* border: 1px solid black; */
-  vertical-align: baseline;
-  display: inline-block;
-  line-height: 28px;
-  padding-left: 30px;
+.content-wrapper > .content-file > .content-file-wrapper, .content-wrapper > .content-file > .content-file-wrapper > .box-combo {
+  display: flex;
+  justify-content: space-between;
 }
 
-.content-box-upload {
-  min-width: 20px;
-  width: 82%;
-  /* border: 1px solid black; */
-  vertical-align: middle;
-  display: inline-block;
-  height: 28px;
+.content-wrapper > .content-file > .content-file-wrapper > .file-title {
+  margin-right: 10px;
+}
+
+.content-wrapper > .content-box-upload {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-wrapper > .content-box-upload > .txt-upload {
+  flex: 55%;
+  background-color: gray;
+}
+
+.content-wrapper > .content-box-upload > .content-box-btnbox > #btn-file-choose {
+  margin-left: 10px;
+}
+
+.content-box .file-title {
+  width: 20px;
+}
+
+.content-file > .calender-container {
+  width: 100px;
+  display: flex;
+  place-items: center;
+}
+
+.content-file > .calender-container > .calender-box > #datepicker-items-title {
+  display: none;
 }
 
 .content-box-download {
   min-width: 20px;
-  width: 82%;
   /* border: 1px solid black; */
-  display: block;
   height: 28px;
 }
 
 .content-box-btnbox {
   min-width: 20px;
-  width: 15%;
   /* border: 1px solid black; */
   vertical-align: middle;
-  display: inline-block;
   height: 28px;
 }
 
 .btn-content-box-half {
   min-width: 20px;
-  width: 50%;
   /* border: 1px solid black; */
-  vertical-align: baseline;
-  display: inline-block;
   height: 22px;
 }
 
 .btn-upload {
-  width: 78px;
-  display: inline-block;
   margin-right: 10px;
   height: 22px;
   border: 1px solid;
@@ -94,7 +105,6 @@
 
 .txt-upload {
   height: 22px;
-  width: 545px;
   font-size: 10px;
   vertical-align: top;
 }

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Header from '../components/Header';
 import TuiGrid from '../components/TuiGrid';
 import '../css/SRM_501W.css';
 import CustDatePicker from '../components/CustDatePicker';
 import CustomFetch from '../components/CustomFetch';
 import NavBar from '../components/NavBar';
+import Modal from '../components/Modal';
+import FileUploadForm from '../components/FileUploadForm';
 
 /**
  * 화면명 : 품목별 성적서 파일등록 (정현락)
@@ -20,6 +22,48 @@ const SRM_501W = () => {
     Grid1: [],
     Grid2: [],
   });
+
+  // 모달 띄우기. 
+  const [modalOpen, setModalOpen] = useState(false);  // 모달띄우기 여부
+  const [heading, setHeading] = useState("");         // 모달 헤딩 
+  const [api, setApi] = useState("");                 // 띄울 데이터 api
+  const [popupNumber, setPopupNumber] = useState(0);  // 띄울 팝업 번호 
+
+
+  const openModal1 = () => {
+    setModalOpen(true);
+    setApi("api/Popup/SRM501Wpopup1");
+    setHeading("거래처팝업");
+    setPopupNumber(1);
+  }
+
+  const openModal2 = () => {
+    setModalOpen(true);
+    setApi("api/Popup/SRM501Wpopup2");
+    setHeading("품목팝업");
+    setPopupNumber(2);
+  }
+
+  const rowCallBack = (rowData, pop) => {
+    if(rowData !== null) {
+      switch(pop) {
+        case 1: 
+          document.getElementById('pop1_input').value = rowData.BP_CD;
+          document.getElementById('pop1_input_readonly').value = rowData.BP_NM;
+        break;
+        case 2: 
+          document.getElementById('pop2_input').value = rowData.ITEM_CD;
+          document.getElementById('pop2_input_readonly').value = rowData.ITEM_NM;
+        break;
+        default : break;
+      }
+    }
+    setModalOpen(false);
+  }
+
+  const closeModal = (value) => {
+    setModalOpen(value);
+  };
 
   //콤보박스 데이터
   const [cmbItems, setCmbItems] = useState({
@@ -97,29 +141,38 @@ const SRM_501W = () => {
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM501W/list'} /> */}
       <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM501W/list'} />
+      <Modal 
+        open={modalOpen} 
+        close={closeModal} 
+        header={heading} 
+        api={api} 
+        rowCallBack={rowCallBack}
+        popupNumber={popupNumber}
+        >
+      </Modal>
       <div>
         <div className="conditions-wrapper">
           <div className="conditions-box">
             <span>발주처 </span>
             <div className="box-popup">
-              <input type="text" className="txt-popup"></input>
-              <button className="btn-popup">
+              <input id="pop1_input" type="text" className="txt-popup"></input>
+              <button className="btn-popup" onClick={openModal1}>
                 <span>...</span>
               </button>
             </div>
             <span>&nbsp;</span>
-            <input type="text" className="txt-readOnly" readOnly></input>
+            <input id="pop1_input_readonly" type="text" className="txt-readOnly" readOnly></input>
           </div>
           <div className="conditions-box">
             <span>품목 </span>
             <div className="box-popup">
-              <input type="text" className="txt-popup"></input>
-              <button className="btn-popup">
+              <input id="pop2_input" type="text" className="txt-popup"></input>
+              <button className="btn-popup" onClick={openModal2}>
                 <span>...</span>
               </button>
             </div>
             <span>&nbsp;</span>
-            <input type="text" className="txt-readOnly" readOnly></input>
+            <input id="pop2_input_readonly" type="text" className="txt-readOnly" readOnly></input>
           </div>
         </div>
       </div>
@@ -136,16 +189,16 @@ const SRM_501W = () => {
         </div>
         <div className="right-container">
           <div className="content-wrapper">
-            <div className="content-box">
-              <span>파일종류 : </span>
-              <div className="box-combo">
-                <input type="text" className="txt-combo"></input>
-                <button className="btn-combo">
-                  <span>&lt;</span>
-                </button>
+            <div className="content-file">
+              <div className='content-file-wrapper'>
+                <span className='file-title'>파일종류 : </span>
+                <div className="box-combo">
+                  <input type="text" className="txt-combo"></input>
+                  <button className="btn-combo">
+                    <span>&lt;</span>
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="content-box">
               <CustDatePicker
                 dateTitle={' '}
                 startDate={startDate}
@@ -154,17 +207,7 @@ const SRM_501W = () => {
                 setEndDate={setEndDate}
               />
             </div>
-            <div className="content-box-upload">
-              <button className="btn-upload">
-                <span className="txt-btn-upload">Upload</span>
-              </button>
-              <input className="txt-upload" readOnly></input>
-            </div>
-            <div className="content-box-btnbox">
-              <button className="btn-upload">
-                <span className="txt-btn-upload">파일선택</span>
-              </button>
-            </div>
+            <FileUploadForm></FileUploadForm>
             <div className="content-box-download">
               <button className="btn-upload">
                 <span className="txt-btn-upload">일괄 다운</span>
