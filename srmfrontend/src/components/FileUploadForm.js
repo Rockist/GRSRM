@@ -5,10 +5,12 @@ import FileUploadFetch from '../components/FileUploadFetch';
 const FileUploadForm = (props) => {
 
     const [file, setFile] = useState(null);
+    const [filePath, setFilePath] = useState("");
 
     const onFileChange = (event) => { 
         // Update the state 
         setFile(event.target.files[0]); 
+        setFilePath(file.name);
     }; 
 
     const onFileUpload = (ev) => {
@@ -27,7 +29,7 @@ const FileUploadForm = (props) => {
             <button className="btn-upload" type='submit'>
                   Upload
              </button>
-            <input className="txt-upload" type="text" readOnly></input>
+            <input className="txt-upload" type="text" readOnly value={filePath}></input>
             <input type="file" name="uploadfile" onChange={onFileChange} id="file" style={{display:'none'}}/>
             <label htmlFor="file" className="btn-upload" id='btn-file-choose'>
                 파일선택

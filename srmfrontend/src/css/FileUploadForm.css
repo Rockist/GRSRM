@@ -12,7 +12,7 @@
 
 .fileupload-form > .form > .txt-upload {
     flex: 1;
-    background-color: tomato;
+    background-color: gray;
 }
 
 .fileupload-form > .form > .btn-upload {

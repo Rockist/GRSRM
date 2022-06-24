@@ -183,12 +183,13 @@ const SRM_501W = () => {
             viewName={'SRM_501W'}
             data={data.Grid1}
             cmbItems={cmbItems}
-            bodyHeight={750}
+            bodyHeight={"fitToParent"}
             onClick={useClickEventHandler}
           />
         </div>
         <div className="right-container">
           <div className="content-wrapper">
+            <div className='content-file-wrapper'>
             <div className="content-file">
               <div className='content-file-wrapper'>
                 <span className='file-title'>파일종류 : </span>
@@ -221,14 +222,15 @@ const SRM_501W = () => {
                 <span className="txt-btn-upload">일괄 삭제</span>
               </button>
             </div>
+            </div>
           </div>
-          <div className="content-box-grid">
-            <TuiGrid
+          <div className='content-grid'>
+           <TuiGrid
               columns={colHeader.filter((col) => col.MENU_TAB_NO === '2')}
               viewName={'SRM_501W'}
               data={data.Grid2.length === 0 ? grid2Dummy : data.Grid2}
               cmbItems={cmbItems}
-              bodyHeight={667}
+              bodyHeight={"fitToParent"}
               onClick={() => {}}
             />
           </div>

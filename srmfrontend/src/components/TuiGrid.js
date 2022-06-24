@@ -126,7 +126,7 @@ const TuiGrid = React.forwardRef((props, ref) => {
   });
 
   return (
-    <div>
+    <div className='grid-wrapper'>
       <Grid
         ref={ref}
         data={data}
