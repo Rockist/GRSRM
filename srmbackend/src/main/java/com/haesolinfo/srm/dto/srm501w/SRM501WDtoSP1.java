@@ -1,4 +1,4 @@
-package com.haesolinfo.srm.dto;
+package com.haesolinfo.srm.dto.srm501w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.haesolinfo.srm.dto.pk.SRM501WDtoSP1PK;

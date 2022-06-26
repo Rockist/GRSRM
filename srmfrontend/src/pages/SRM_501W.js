@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Header from '../components/Header';
 import TuiGrid from '../components/TuiGrid';
 import '../css/SRM_501W.css';
-import CustDatePicker from '../components/CustDatePicker';
+
 import CustomFetch from '../components/CustomFetch';
 import NavBar from '../components/NavBar';
 import Modal from '../components/Modal';
@@ -14,22 +14,24 @@ import FileUploadForm from '../components/FileUploadForm';
  * @returns
  */
 
-const SRM_501W = () => {
+const SRM_501W = (props) => {
+  const {inActive} = props;
+  const gridRef1 = useRef();
+  const gridRef2 = useRef();
+
   const [colHeader, setColHeader] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
   const [data, setData] = useState({
     Grid1: [],
     Grid2: [],
   });
 
-  // 모달 띄우기. 
+  // 모달 관련
   const [modalOpen, setModalOpen] = useState(false);  // 모달띄우기 여부
   const [heading, setHeading] = useState("");         // 모달 헤딩 
   const [api, setApi] = useState("");                 // 띄울 데이터 api
   const [popupNumber, setPopupNumber] = useState(0);  // 띄울 팝업 번호 
 
-
+  // 추후에 모달함수 한개로 변경 필요. 
   const openModal1 = () => {
     setModalOpen(true);
     setApi("api/Popup/SRM501Wpopup1");
@@ -38,6 +40,7 @@ const SRM_501W = () => {
   }
 
   const openModal2 = () => {
+    // 리엑트에서는 어차피 state 변경을 한번에 하기때문에 이렇게 해도됨. 
     setModalOpen(true);
     setApi("api/Popup/SRM501Wpopup2");
     setHeading("품목팝업");
@@ -64,6 +67,10 @@ const SRM_501W = () => {
   const closeModal = (value) => {
     setModalOpen(value);
   };
+  
+  // file 관련
+  const [custCd, setCustCd] = useState("");
+  const [itemCd, setItemCd] = useState("");
 
   //콤보박스 데이터
   const [cmbItems, setCmbItems] = useState({
@@ -83,9 +90,6 @@ const SRM_501W = () => {
   //Grid2 Data Click Event
   const useClickEventHandler = (ev) => {
     if (ev.rowKey === undefined) return;
-    console.log(ev.rowKey);
-    console.log('handleClick', data.Grid1[ev.rowKey].CUST_CD);
-
     CustomFetch('localhost:8080', 'api/SRM501W/sp2', {
       divCd: '01',
       custCd: data.Grid1[ev.rowKey].CUST_CD,
@@ -93,6 +97,8 @@ const SRM_501W = () => {
     })
       .then((res) => {
         console.log('결과 : ', res);
+        setCustCd(data.Grid1[ev.rowKey].CUST_CD);
+        setItemCd(data.Grid1[ev.rowKey].ITEM_CD);
         setData({ Grid1: [...data.Grid1], Grid2: [...res.Grid2] });
       })
       .catch((error) => console.log(error));
@@ -134,9 +140,14 @@ const SRM_501W = () => {
     },
   ];
 
+  useEffect(() => {
+    // 이걸로 닫기 눌렀을때 넓이값 조절함. 
+    document.querySelector('.content-file-wrapper').style.width = !inActive ? "820px" : "900px";
+    gridRef1.current.getInstance().setWidth(!inActive ? 820 : 900);
+    gridRef2.current.getInstance().setWidth(!inActive ? 820 : 900);
+  })
   //저장
   /////
-
   return (
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM501W/list'} /> */}
@@ -179,58 +190,34 @@ const SRM_501W = () => {
       <div className="mainContainer">
         <div className="left-container">
           <TuiGrid
+            ref={gridRef1}
             columns={colHeader.filter((col) => col.MENU_TAB_NO === '1')}
             viewName={'SRM_501W'}
             data={data.Grid1}
             cmbItems={cmbItems}
-            bodyHeight={"fitToParent"}
+            bodyHeight={803}
+            width={820}
             onClick={useClickEventHandler}
           />
         </div>
         <div className="right-container">
           <div className="content-wrapper">
-            <div className='content-file-wrapper'>
-            <div className="content-file">
-              <div className='content-file-wrapper'>
-                <span className='file-title'>파일종류 : </span>
-                <div className="box-combo">
-                  <input type="text" className="txt-combo"></input>
-                  <button className="btn-combo">
-                    <span>&lt;</span>
-                  </button>
-                </div>
-              </div>
-              <CustDatePicker
-                dateTitle={' '}
-                startDate={startDate}
-                setStartDate={setStartDate}
-                endDate={endDate}
-                setEndDate={setEndDate}
-              />
-            </div>
-            <FileUploadForm></FileUploadForm>
-            <div className="content-box-download">
-              <button className="btn-upload">
-                <span className="txt-btn-upload">일괄 다운</span>
-              </button>
-              <button
-                className="btn-upload"
-                onClick={() => {
-                  window.print();
-                }}
-              >
-                <span className="txt-btn-upload">일괄 삭제</span>
-              </button>
-            </div>
-            </div>
+            <FileUploadForm 
+              itemCd={itemCd}
+              custCd={custCd}
+              setData={setData}
+              data={data}
+            />
           </div>
           <div className='content-grid'>
            <TuiGrid
+              ref={gridRef2}
               columns={colHeader.filter((col) => col.MENU_TAB_NO === '2')}
               viewName={'SRM_501W'}
               data={data.Grid2.length === 0 ? grid2Dummy : data.Grid2}
               cmbItems={cmbItems}
-              bodyHeight={"fitToParent"}
+              bodyHeight={660}
+              width={820}
               onClick={() => {}}
             />
           </div>

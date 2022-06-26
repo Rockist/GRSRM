@@ -1,8 +1,8 @@
 package com.haesolinfo.srm.repository;
 
 import com.haesolinfo.srm.dao.SRM204WPreviewSpDao;
-import com.haesolinfo.srm.dto.SRM204WDtoSP1;
-import com.haesolinfo.srm.dto.SRM204WDtoSP2;
+import com.haesolinfo.srm.dto.srm204w.SRM204WDtoSP1;
+import com.haesolinfo.srm.dto.srm204w.SRM204WDtoSP2;
 import com.haesolinfo.srm.vo.SRM100RVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,6 @@ import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

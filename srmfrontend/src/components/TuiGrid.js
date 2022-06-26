@@ -5,7 +5,7 @@ import '../css/TuiGrid.css';
 import CheckboxRenderer from './CheckboxRenderer';
 
 const TuiGrid = React.forwardRef((props, ref) => {
-  const { columns, data, cmbItems, bodyHeight, onClick } = props;
+  const { columns, data, cmbItems, bodyHeight, width, height, onClick } = props;
   const cusCols = [];
 
   //console.log('TuiGrid : ', data);
@@ -134,6 +134,7 @@ const TuiGrid = React.forwardRef((props, ref) => {
         rowHeight={29}
         minRowHeight={20}
         bodyHeight={bodyHeight}
+        width={width}
         heightResizable={true}
         rowHeaders={['rowNum']}
         columnOptions={{ resizable: true }}

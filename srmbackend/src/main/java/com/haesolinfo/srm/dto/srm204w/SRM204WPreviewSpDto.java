@@ -1,11 +1,10 @@
-package com.haesolinfo.srm.dto;
+package com.haesolinfo.srm.dto.srm204w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.haesolinfo.srm.dao.SRM204WPreviewSpDao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

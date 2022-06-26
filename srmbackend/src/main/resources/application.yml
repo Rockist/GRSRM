@@ -3,6 +3,10 @@ server:
     encoding:
       charset: UTF-8
       enabled: true
+    multipart:
+      enabled: true
+      max-file-size: 100KB
+      max-request-size: 100KB
 
 spring:
   datasource:
@@ -31,3 +35,6 @@ logging:
     #ROOT: DEBUG
     org.hibernate.SQL: debug
     #org.hibernate.type: trace
+
+file:
+  path: C:\Users\류철철\georim\upload\

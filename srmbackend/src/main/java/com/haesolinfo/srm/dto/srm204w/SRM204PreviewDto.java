@@ -1,4 +1,4 @@
-package com.haesolinfo.srm.dto;
+package com.haesolinfo.srm.dto.srm204w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.haesolinfo.srm.dao.SRM204WPreviewSpDao;
@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

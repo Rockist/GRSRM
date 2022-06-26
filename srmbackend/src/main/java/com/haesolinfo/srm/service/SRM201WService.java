@@ -1,8 +1,8 @@
 package com.haesolinfo.srm.service;
 
-import com.haesolinfo.srm.dto.SRM201WDto;
-import com.haesolinfo.srm.dto.SRM201WDtoSP1;
-import com.haesolinfo.srm.dto.SRM201WDtoSP2;
+import com.haesolinfo.srm.dto.srm201w.SRM201WDto;
+import com.haesolinfo.srm.dto.srm201w.SRM201WDtoSP1;
+import com.haesolinfo.srm.dto.srm201w.SRM201WDtoSP2;
 import com.haesolinfo.srm.repository.SRM201WRepository;
 import com.haesolinfo.srm.vo.SRM201WVO;
 import lombok.RequiredArgsConstructor;

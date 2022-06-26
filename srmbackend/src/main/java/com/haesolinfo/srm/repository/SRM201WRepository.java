@@ -1,7 +1,7 @@
 package com.haesolinfo.srm.repository;
 
-import com.haesolinfo.srm.dto.SRM201WDtoSP1;
-import com.haesolinfo.srm.dto.SRM201WDtoSP2;
+import com.haesolinfo.srm.dto.srm201w.SRM201WDtoSP1;
+import com.haesolinfo.srm.dto.srm201w.SRM201WDtoSP2;
 import com.haesolinfo.srm.vo.SRM201WVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

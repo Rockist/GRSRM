@@ -1,16 +1,13 @@
-package com.haesolinfo.srm.dto;
+package com.haesolinfo.srm.dto.srm501w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.haesolinfo.srm.dto.pk.SRM501WDtoSP2PK;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.NamedStoredProcedureQuery;
-import java.time.LocalDate;
 
 @NamedStoredProcedureQuery(
         name = "SRM501WDtoSP2.USP_SRM_501W_QUERY2",

@@ -1,8 +1,8 @@
 package com.haesolinfo.srm.service;
 
 
-import com.haesolinfo.srm.dto.popup.SRM501WPopDto1;
-import com.haesolinfo.srm.dto.popup.SRM501WPopDto2;
+import com.haesolinfo.srm.dto.srm501w.SRM501WPopDto1;
+import com.haesolinfo.srm.dto.srm501w.SRM501WPopDto2;
 import com.haesolinfo.srm.repository.PopupRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

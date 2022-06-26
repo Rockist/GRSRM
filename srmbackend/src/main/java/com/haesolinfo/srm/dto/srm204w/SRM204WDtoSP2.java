@@ -1,8 +1,6 @@
-package com.haesolinfo.srm.dto;
+package com.haesolinfo.srm.dto.srm204w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.haesolinfo.srm.config.ForceNullDoubleSerializer;
 import com.haesolinfo.srm.dto.pk.SRM204WDtoSP2PK;
 import lombok.Data;
 

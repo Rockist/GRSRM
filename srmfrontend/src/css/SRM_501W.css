@@ -43,12 +43,12 @@
   justify-content: space-between;
 }
 
-.content-wrapper > .content-file > .content-file-wrapper, .content-wrapper > .content-file > .content-file-wrapper > .box-combo {
+.content-wrapper > .content-file > .content-file-wrapper, .content-wrapper > .content-file > .content-file-box > .box-combo {
   display: flex;
   justify-content: space-between;
 }
 
-.content-wrapper > .content-file > .content-file-wrapper > .file-title {
+.content-wrapper > .content-file > .content-file-box > .file-title {
   margin-right: 10px;
 }
 

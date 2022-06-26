@@ -14,6 +14,7 @@ const Modal = (props) => {
  
   useEffect(() => {
     if(open && isDataOpen) {
+      console.log("????");
       let input = document.getElementById('word').value;
       console.log("input : " + input);
       CustomFetch('localhost:8080', api, input+"")

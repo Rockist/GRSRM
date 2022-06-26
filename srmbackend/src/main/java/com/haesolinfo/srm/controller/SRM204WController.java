@@ -1,7 +1,7 @@
 package com.haesolinfo.srm.controller;
 
-import com.haesolinfo.srm.dto.SRM204PreviewDto;
-import com.haesolinfo.srm.dto.SRM204WDto;
+import com.haesolinfo.srm.dto.srm204w.SRM204PreviewDto;
+import com.haesolinfo.srm.dto.srm204w.SRM204WDto;
 import com.haesolinfo.srm.service.SRM204WService;
 import com.haesolinfo.srm.vo.SRM100RVO;
 import lombok.RequiredArgsConstructor;

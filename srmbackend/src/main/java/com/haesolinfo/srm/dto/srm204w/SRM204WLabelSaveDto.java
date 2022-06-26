@@ -1,4 +1,4 @@
-package com.haesolinfo.srm.dto;
+package com.haesolinfo.srm.dto.srm204w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

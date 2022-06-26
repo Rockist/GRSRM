@@ -42,7 +42,7 @@ function App() {
           <Route path="/SRM_202W" element={<SRM_202W />} />
           <Route path="/SRM_203W" element={<SRM_203W />} />
           <Route path="/SRM_204W" element={<SRM_204W />} />
-          <Route path="/SRM_501W" element={<SRM_501W />} />
+          <Route path="/SRM_501W" element={<SRM_501W inActive={inactive}/>} />
 
           <Route path="/SRM_301R" element={<SRM_301R />} />
           <Route path="/SRM_302R" element={<SRM_302R />} />

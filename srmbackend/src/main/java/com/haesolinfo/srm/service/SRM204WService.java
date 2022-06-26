@@ -1,7 +1,10 @@
 package com.haesolinfo.srm.service;
 
 import com.haesolinfo.srm.dao.SRM204WPreviewSpDao;
-import com.haesolinfo.srm.dto.*;
+import com.haesolinfo.srm.dto.srm204w.SRM204PreviewDto;
+import com.haesolinfo.srm.dto.srm204w.SRM204WDto;
+import com.haesolinfo.srm.dto.srm204w.SRM204WDtoSP1;
+import com.haesolinfo.srm.dto.srm204w.SRM204WDtoSP2;
 import com.haesolinfo.srm.exception.LabelSaveException;
 import com.haesolinfo.srm.repository.SRM204WRepository;
 import com.haesolinfo.srm.vo.SRM100RVO;

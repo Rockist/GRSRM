@@ -1,12 +1,16 @@
-package com.haesolinfo.srm.dto.popup;
+package com.haesolinfo.srm.dto.srm501w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.haesolinfo.srm.dto.popup.PopupDtoInterface;
+import com.haesolinfo.srm.dto.popup.PopupHeader;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class SRM501WPopDto2 implements PopupDtoInterface {
     @JsonProperty("BP_CD")
     private String PUR_CUST_CD;
@@ -18,14 +22,12 @@ public class SRM501WPopDto2 implements PopupDtoInterface {
     private String ITEM_NM;
     @JsonProperty("SPEC")
     private String SPEC;
-
     public SRM501WPopDto2(String PUR_CUST_CD, String BP_NM, String ITEM_CD, String ITEM_NM) {
         this.PUR_CUST_CD = PUR_CUST_CD;
         this.BP_NM = BP_NM;
         this.ITEM_CD = ITEM_CD;
         this.ITEM_NM = ITEM_NM;
     }
-
     @Override
     public boolean filter(String word) {
         String tword = word.replace("\"", "");
