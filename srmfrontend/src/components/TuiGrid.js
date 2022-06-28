@@ -2,11 +2,10 @@ import Grid from '@toast-ui/react-grid';
 import React from 'react';
 import 'tui-grid/dist/tui-grid.css';
 import '../css/TuiGrid.css';
-import ButtonRenderer from './ButtonRenderer';
 import CheckboxRenderer from './CheckboxRenderer';
 
 const TuiGrid = React.forwardRef((props, ref) => {
-  const { columns, data, cmbItems, bodyHeight, width, height, onClick, buttonClick } = props;
+  const { columns, data, cmbItems, bodyHeight, width, height, onClick } = props;
   const cusCols = [];
 
   //console.log('TuiGrid : ', data);
@@ -14,7 +13,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
   const copyHeaders = [...columns]; //컬럼헤더 깊은복사
 
   copyHeaders.map((menu) => {
-    console.log("menu : " + menu);
     //세로정렬
     let valign = menu.COL_VA === '0' ? 'middle' : menu.COL_VA === '1' ? 'top' : 'bottom';
 
@@ -31,7 +29,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
     if (menu.COL_HIDDEN === 'Y') colHidden = true;
     switch (menu.COL_TYPE) {
       case '0':
-        console.log(0);
         cusCols.push({
           header: menu.COL_NM,
           name: menu.COL_ID,
@@ -43,7 +40,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
         });
         break;
       case '1':
-        console.log(1);
         cusCols.push({
           header: menu.COL_NM,
           name: menu.COL_ID,
@@ -51,32 +47,14 @@ const TuiGrid = React.forwardRef((props, ref) => {
           valign: valign,
           align: align,
           hidden: colHidden,
+          editor: 'text',
           type: 'checkbox',
           renderer: {
             type: CheckboxRenderer,
           },
         });
         break;
-      case '2':
-        console.log(2);
-        cusCols.push({
-          header: menu.COL_NM,
-          name: menu.COL_ID,
-          minWidth: menu.COL_WIDTH,
-          valign: valign,
-          align: align,
-          hidden: colHidden,
-          renderer: {
-            type: ButtonRenderer,
-            options: {
-              text: menu.COL_NM,
-              clickEvent : buttonClick
-            }
-          },
-        });
-        break;
       case '3':
-        console.log(3);
         if (menu.COL_MCD === '') {
         } else {
           // CustomFetch('localhost:8080', 'api/CmbItems/SubCd', {
@@ -117,7 +95,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
         });
         break;
       case '4':
-        console.log(4);
         cusCols.push({
           header: menu.COL_NM,
           name: menu.COL_ID,
@@ -135,7 +112,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
         break;
 
       default:
-        console.log('d');
         cusCols.push({
           header: menu.COL_NM,
           name: menu.COL_ID,
@@ -157,7 +133,7 @@ const TuiGrid = React.forwardRef((props, ref) => {
         columns={cusCols}
         rowHeight={29}
         minRowHeight={20}
-        bodyHeight={'fitToParent'}
+        bodyHeight={bodyHeight}
         width={width}
         heightResizable={true}
         rowHeaders={['rowNum']}

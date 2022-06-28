@@ -72,52 +72,6 @@ const SRM_501W = (props) => {
   const [custCd, setCustCd] = useState("");
   const [itemCd, setItemCd] = useState("");
 
-  const download = (rowKey) => {
-    var a = document.createElement("a");
-    a.href = "http://localhost:8080/api/SRM501W/file_download?" + new URLSearchParams({
-      divCd : "01",
-      fileNo : data.Grid2[rowKey].FILE_NO,
-      fileName : data.Grid2[rowKey].FILE_NAME,
-      fileSeq : Number(data.Grid2[rowKey].FILE_SEQ)
-    })
-    a.setAttribute("download", data.Grid2[rowKey].FILE_NAME);
-    a.click();
-  }
-
-  const buttonClick = (rowKey, text) => {
-    switch(text) {
-      case "다운로드" : download(rowKey); break;
-      case "삭제" : 
-      CustomFetch('localhost:8080', 'api/SRM501W/file_delete', {
-        divCd: '01',
-        custCd: custCd,
-        itemCd: itemCd,
-        fileSeq : Number(data.Grid2[rowKey].FILE_SEQ)
-      }).then((res) => {
-          if(res === 0) {
-            CustomFetch('localhost:8080', 'api/SRM501W/sp2', {
-              divCd: '01',
-              custCd: custCd,
-              itemCd: itemCd,
-            })
-              .then((res) => {
-                console.log('결과 : ', res);
-                setData({ Grid1: [...data.Grid1], Grid2: [...res.Grid2] });
-              })
-              .catch((error) => console.log(error));
-          } else {
-            alert('파일 삭제 실패!');
-          }
-        })
-        .catch((error) => console.log(error));
-      break;
-      case "열기" : 
-        console.log(3);
-      break;
-      default: break;
-    }
-  }
-
   //콤보박스 데이터
   const [cmbItems, setCmbItems] = useState({
     FILE_NO: [
@@ -185,25 +139,12 @@ const SRM_501W = (props) => {
       OPEN_FILE: '',
     },
   ];
- 
-  const handleResize = () => {
-    console.log("resize");
-  
-   
-  }
 
   useEffect(() => {
     // 이걸로 닫기 눌렀을때 넓이값 조절함. 
-    // document.querySelector('.content-file-wrapper').style.width = !inActive ? "820px" : "900px";
-     window.addEventListener('resize', handleResize);
-      const pageWidth  = window.innerWidth - 30;
-      console.log("width: " + pageWidth);
-      let width = (pageWidth - (!inActive ? 240 : 80)) / 2;
-      gridRef1.current.getInstance().setWidth(width);
-      gridRef2.current.getInstance().setWidth(width);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      }
+    document.querySelector('.content-file-wrapper').style.width = !inActive ? "820px" : "900px";
+    gridRef1.current.getInstance().setWidth(!inActive ? 820 : 900);
+    gridRef2.current.getInstance().setWidth(!inActive ? 820 : 900);
   })
   //저장
   /////
@@ -254,7 +195,8 @@ const SRM_501W = (props) => {
             viewName={'SRM_501W'}
             data={data.Grid1}
             cmbItems={cmbItems}
-            bodyHeight={"fitToParent"}
+            bodyHeight={803}
+            width={820}
             onClick={useClickEventHandler}
           />
         </div>
@@ -274,9 +216,9 @@ const SRM_501W = (props) => {
               viewName={'SRM_501W'}
               data={data.Grid2.length === 0 ? grid2Dummy : data.Grid2}
               cmbItems={cmbItems}
-              bodyHeight={"fitToParent"}
+              bodyHeight={660}
+              width={820}
               onClick={() => {}}
-              buttonClick={buttonClick}
             />
           </div>
         </div>

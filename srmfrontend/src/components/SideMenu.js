@@ -42,16 +42,6 @@ const menuItems = [
       { name: '매출마감조회', to: '/SRM_302R' },
     ],
   },
-  {
-    name: '금형관리',
-    iconClassName: 'bi bi-vector-pen',
-    subMenus: [
-      { name: '금형발주조회', to: '/SRM_704W' },
-      // { name: '금형견적등록', to: '/SRM_302R' },
-      // { name: '금형납품등록', to: '/SRM_302R' },
-      // { name: '금형매출마감조회', to: '/SRM_302R' },
-    ],
-  },
 ];
 
 const SideMenu = (props) => {

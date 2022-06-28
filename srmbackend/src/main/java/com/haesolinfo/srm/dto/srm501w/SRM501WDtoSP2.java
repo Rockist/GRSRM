@@ -1,7 +1,7 @@
 package com.haesolinfo.srm.dto.srm501w;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.haesolinfo.srm.dto.pk.srm501w.SRM501WDtoSP2PK;
+import com.haesolinfo.srm.dto.pk.SRM501WDtoSP2PK;
 import lombok.Data;
 
 import javax.persistence.Entity;
