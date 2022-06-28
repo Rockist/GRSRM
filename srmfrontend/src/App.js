@@ -13,6 +13,8 @@ import SRM_302R from './pages/SRM_302R';
 import SRM_501W from './pages/SRM_501W';
 import XM_101W from './pages/X/XM_101W';
 import PreviewPage from './pages/PreviewPage';
+import SRM_704W from './pages/PD/SRM_704W';
+
 function App() {
   const [inactive, setInactive] = useState(false);
   const modal = document.querySelector('#modal');
@@ -47,6 +49,9 @@ function App() {
           <Route path="/SRM_301R" element={<SRM_301R />} />
           <Route path="/SRM_302R" element={<SRM_302R />} />
           <Route path="/PreviewPage" element={<PreviewPage />} />
+
+          {/********************** 금형 ***********************/}
+          <Route path="/SRM_704W" element={<SRM_704W inActive={inactive}/>} />
         </Routes>
       </div>
     </div>

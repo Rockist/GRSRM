@@ -1,32 +1,26 @@
 package com.haesolinfo.srm.service;
 
-import com.haesolinfo.srm.dto.srm501w.SRM501WDto;
-import com.haesolinfo.srm.dto.srm501w.SRM501WDtoSP1;
-import com.haesolinfo.srm.dto.srm501w.SRM501WDtoSP2;
-import com.haesolinfo.srm.dto.srm501w.SRM501WFileDto;
+import com.haesolinfo.srm.dto.srm501w.*;
 import com.haesolinfo.srm.repository.SRM501WRepository;
+import com.haesolinfo.srm.vo.srm501w.SRM501WFileDelVo;
+import com.haesolinfo.srm.vo.srm501w.SRM501WFileDownVo;
 import com.haesolinfo.srm.vo.srm501w.SRM501WFileVo;
 import com.haesolinfo.srm.vo.srm501w.SRM501WVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-import sun.jvm.hotspot.utilities.BitMap;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -73,7 +67,6 @@ public class SRM501WService {
     }
 
     public int fileUpload(SRM501WFileVo vo) {
-        log.info(vo.toString());
         UUID uuid = UUID.randomUUID();
         String originalFilename = vo.getFile().getOriginalFilename();
 
@@ -108,8 +101,40 @@ public class SRM501WService {
         return result;
     }
 
+    public Resource fileDownload(SRM501WFileDownVo vo) {
+        List<SRM501WFileDownDto> resultList = srm501WRepository.fileDownload(vo);
+        ByteArrayResource  resource = null;
+        if(resultList.size() > 0) {
+            SRM501WFileDownDto srmDto = resultList.get(0);
+            try {
+                byte[] data = srmDto.getFILE_IMAGE();
+                Path path = Paths.get(filePath + srmDto.getFILE_NAME());
+                Files.write(path, data);
+                resource = new ByteArrayResource(Files.readAllBytes(path)); // 파일 resource 얻기
+
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(100000);
+                        Files.delete(path);
+                    } catch (InterruptedException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+            }
+            catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return resource;
+    }
+
     private boolean imageCheck(String fileExtension) {
         return fileExtension.equalsIgnoreCase(".jpg") || fileExtension.equalsIgnoreCase(".bmp") || fileExtension.equalsIgnoreCase(".png") || fileExtension.equalsIgnoreCase(".tif") ||
                 fileExtension.equalsIgnoreCase(".jpeg") || fileExtension.equalsIgnoreCase(".gif");
+    }
+
+    public int deleteFile(SRM501WFileDelVo vo) {
+        int result = srm501WRepository.deleteFile(vo);
+        return result;
     }
 }

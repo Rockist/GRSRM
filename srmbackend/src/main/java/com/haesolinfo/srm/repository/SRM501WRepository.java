@@ -2,12 +2,17 @@ package com.haesolinfo.srm.repository;
 
 import com.haesolinfo.srm.dto.srm501w.SRM501WDtoSP1;
 import com.haesolinfo.srm.dto.srm501w.SRM501WDtoSP2;
+import com.haesolinfo.srm.dto.srm501w.SRM501WFileDownDto;
 import com.haesolinfo.srm.dto.srm501w.SRM501WFileDto;
+import com.haesolinfo.srm.vo.srm501w.SRM501WFileDelVo;
+import com.haesolinfo.srm.vo.srm501w.SRM501WFileDownVo;
 import com.haesolinfo.srm.vo.srm501w.SRM501WFileVo;
 import com.haesolinfo.srm.vo.srm501w.SRM501WVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
@@ -57,6 +62,7 @@ public class SRM501WRepository {
 
         return resultList;
     }
+    @Transactional
     public int fileUpload(SRM501WFileDto dto)  {
         StoredProcedureQuery spq = em.createStoredProcedureQuery("dbo.FILE_SAVE");
         spq.registerStoredProcedureParameter("DIV_CD", String.class, ParameterMode.IN);
@@ -71,7 +77,6 @@ public class SRM501WRepository {
         spq.registerStoredProcedureParameter("INSERT_ID", String.class, ParameterMode.IN);
         spq.registerStoredProcedureParameter("VALID_DT", String.class, ParameterMode.IN);
 
-//        Base64.getEncoder().encodeToString(dto.getFILE_IMAGE())
         spq.setParameter("DIV_CD", dto.getDIV_CD());
         spq.setParameter("CUST_CD", dto.getCUST_CD());
         spq.setParameter("ITEM_CD", dto.getITEM_CD());
@@ -83,6 +88,41 @@ public class SRM501WRepository {
         spq.setParameter("HEIGHT", dto.getHEIGHT());
         spq.setParameter("INSERT_ID", dto.getINERT_ID());
         spq.setParameter("VALID_DT", dto.getVALID_DT());
+        spq.execute();
+
+        return spq.getFirstResult();
+    }
+
+    public List<SRM501WFileDownDto> fileDownload(SRM501WFileDownVo vo) {
+        log.info("SRM501WFileDownVo : " + vo.toString());
+        StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("SRM501WFileDownDto.FILE_DOWNLOAD");
+        spq.registerStoredProcedureParameter("DIV_CD", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("FILE_NO", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("FILE_NAME", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("FILE_SEQ", Integer.class, ParameterMode.IN);
+
+        spq.setParameter("DIV_CD", vo.getDiv_cd());
+        spq.setParameter("FILE_NO", vo.getFile_no());
+        spq.setParameter("FILE_NAME", vo.getFile_name());
+        spq.setParameter("FILE_SEQ", vo.getFile_seq());
+        spq.execute();
+
+        List<SRM501WFileDownDto> resultList = spq.getResultList();
+        return resultList;
+    }
+
+    @Transactional
+    public int deleteFile(SRM501WFileDelVo vo) {
+        StoredProcedureQuery spq = em.createStoredProcedureQuery("dbo.FILE_DELETE");
+        spq.registerStoredProcedureParameter("DIV_CD", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("CUST_CD", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("ITEM_CD", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("FILE_SEQ", Integer.class, ParameterMode.IN);
+
+        spq.setParameter("DIV_CD", vo.getDivCd());
+        spq.setParameter("CUST_CD", vo.getCustCd());
+        spq.setParameter("ITEM_CD", vo.getItemCd());
+        spq.setParameter("FILE_SEQ", vo.getFileSeq());
         spq.execute();
 
         return spq.getFirstResult();
