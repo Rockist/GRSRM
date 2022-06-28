@@ -1,4 +1,4 @@
-package com.haesolinfo.srm.dto.pk;
+package com.haesolinfo.srm.dto.pk.srm501w;
 
 import lombok.Data;
 

@@ -33,8 +33,6 @@ const SRM_203W = () => {
   const previewCallBack = (value) => {
     if(value) {
       const fillterData = data.filter(data => data.CHK);
-      const modal = document.querySelector('#modal');
-      const root = document.querySelector('#root');
       if(fillterData.length > 0) {
         setPreviewData(fillterData);
         setOpen(!isOpen);

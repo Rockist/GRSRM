@@ -37,4 +37,4 @@ logging:
     #org.hibernate.type: trace
 
 file:
-  path: C:\Users\류철철\georim\upload\
+  path: C:\georimtemp\georim\upload\
