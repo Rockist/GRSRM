@@ -185,25 +185,15 @@ const SRM_501W = (props) => {
       OPEN_FILE: '',
     },
   ];
- 
-  const handleResize = () => {
-    console.log("resize");
-  
-   
-  }
 
   useEffect(() => {
     // 이걸로 닫기 눌렀을때 넓이값 조절함. 
     // document.querySelector('.content-file-wrapper').style.width = !inActive ? "820px" : "900px";
-     window.addEventListener('resize', handleResize);
       const pageWidth  = window.innerWidth - 30;
       console.log("width: " + pageWidth);
       let width = (pageWidth - (!inActive ? 240 : 80)) / 2;
       gridRef1.current.getInstance().setWidth(width);
       gridRef2.current.getInstance().setWidth(width);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      }
   })
   //저장
   /////

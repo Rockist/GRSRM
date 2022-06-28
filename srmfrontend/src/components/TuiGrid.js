@@ -6,7 +6,7 @@ import ButtonRenderer from './ButtonRenderer';
 import CheckboxRenderer from './CheckboxRenderer';
 
 const TuiGrid = React.forwardRef((props, ref) => {
-  const { columns, data, cmbItems, bodyHeight, width, height, onClick, buttonClick } = props;
+  const { columns, data, cmbItems, bodyHeight, width, height, onClick, buttonClick, selectOnly } = props;
   const cusCols = [];
 
   //console.log('TuiGrid : ', data);
@@ -26,9 +26,21 @@ const TuiGrid = React.forwardRef((props, ref) => {
 
     //수정여부
     let colEdit = menu.COL_EDIT === 'Y' ? "editor: 'text'" : '';
-
-    //컬럽타입
     if (menu.COL_HIDDEN === 'Y') colHidden = true;
+
+    if(selectOnly) {
+      cusCols.push({
+        header: menu.COL_NM,
+        name: menu.COL_ID,
+        minWidth: menu.COL_WIDTH,
+        hidden: colHidden,
+        valign: valign,
+        align: align,
+        colEdit,
+      });
+    } else {
+    //컬럽타입
+    
     switch (menu.COL_TYPE) {
       case '0':
         console.log(0);
@@ -147,6 +159,7 @@ const TuiGrid = React.forwardRef((props, ref) => {
         });
         break;
     }
+  }
   });
 
   return (
@@ -157,8 +170,7 @@ const TuiGrid = React.forwardRef((props, ref) => {
         columns={cusCols}
         rowHeight={29}
         minRowHeight={20}
-        bodyHeight={'fitToParent'}
-        width={width}
+        bodyHeight={bodyHeight}
         heightResizable={true}
         rowHeaders={['rowNum']}
         columnOptions={{ resizable: true }}

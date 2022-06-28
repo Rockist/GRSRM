@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.IdClass;
 
 
-@Entity
+
 @Data
 @IdClass(XM102WDtoPK.class)
 public class SRM704WDto {

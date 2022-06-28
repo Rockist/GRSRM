@@ -18,3 +18,7 @@
 .grid-conditions-box-1 > #left {
     place-self: start center;
 } 
+
+.mainContainer {
+    height: 90vh;
+}

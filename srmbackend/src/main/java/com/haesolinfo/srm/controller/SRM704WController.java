@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 /* 금형 */
 
-@Slf4j
-@RestController
-@RequiredArgsConstructor
+
 public class SRM704WController {
 
-    private final SRM704WService srm704WService;
+//    private final SRM704WService srm704WService;
 
 
 }

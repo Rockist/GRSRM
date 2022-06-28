@@ -10,7 +10,8 @@ import '../../css/PD/SRM_704W.css';
  * 화면번호 : SRM_704W
  * @returns
  */
-const SRM_704W = (inActive) => { 
+const SRM_704W = (props) => {
+  const { inActive } = props; 
   const gridRef = useRef();
   const [colHeader, setColHeader] = useState([]);
   const [pageType, setpageType] = useState('D');
@@ -31,7 +32,7 @@ const SRM_704W = (inActive) => {
    //콤보박스 데이터
    const [cmbItems, setCmbItems] = useState({
     REQ_USER_ID: [
-      { text: '자재팀', value: '100' },
+    
     ],
     REQ_TYPE:[{ text: '자재팀', value: '100' },],
     PROC_CD:[{ text: '자재팀', value: '100' }],
@@ -52,20 +53,13 @@ const SRM_704W = (inActive) => {
       }); // 비동기 함수
   }, []); //2번째 인자 미입력시 최초 한번 실행
 
-  const handleResize = () => {
-    console.log("resize");
-    let height = document.querySelector('.nav-container').clientHeight - 100;
-    gridRef.current.getInstance().setBodyHeight(height);
-  }
-
-  useEffect(() => {
+   useEffect(() => {
     // 이걸로 닫기 눌렀을때 넓이값 조절함. 
-     window.addEventListener('resize', handleResize);
-      let height = document.querySelector('.side-menu').clientHeight - 100;
-      gridRef.current.getInstance().setBodyHeight(height);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      }
+    // document.querySelector('.content-file-wrapper').style.width = !inActive ? "820px" : "900px";
+      const pageWidth  = window.innerWidth - 28;
+      console.log("width: " + pageWidth);
+      let width = (pageWidth - (!inActive ? 240 : 80));
+      gridRef.current.getInstance().setWidth(width);
   })
 
   const searchFormData = {
@@ -162,15 +156,18 @@ const SRM_704W = (inActive) => {
             />
           </div> */}
         </div>
-        <TuiGrid
-          ref={gridRef}
-          columns={colHeader.filter((col) => col.MENU_TAB_NO === '1' && col.COL_TYPE === '0')}
-          viewName={'PD_703W'}
-          data={data}
-          cmbItems={cmbItems}
-          width={"fitToParent"}
-          onClick={useClickEventHandler}
-        />
+        <div className='mainContainer'>
+          <TuiGrid
+            ref={gridRef}
+            columns={colHeader.filter((col) => col.MENU_TAB_NO === '1')}
+            viewName={'PD_703W'}
+            bodyHeight={"fitToParent"}
+            data={data}
+            selectOnly={true}
+            cmbItems={cmbItems}
+            onClick={useClickEventHandler}
+          />
+        </div>
       </div>
     </div>
   );
