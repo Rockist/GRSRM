@@ -18,4 +18,5 @@ public class SrmApplication {
 		//hibernate5Module.configure(Hibernate5Module.Feature.FORCE_LAZY_LOADING, true);
 		return new Hibernate5Module();	//기본 지연로딩의 경우 null로 무시
 	}
+
 }
