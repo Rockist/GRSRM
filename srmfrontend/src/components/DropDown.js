@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useStatem, useEffect } from 'react';
 
 const DropDown = (props) => {
-  const { data, name } = props;
+  const { data, name, setIndex } = props;
   console.log("data : " + data);
+
+  useEffect(() => {
+    document.getElementById(name).selectedIndex = setIndex;
+  }, [])
 
   const addSelect = ((data) => {
     var array = [];
@@ -16,9 +20,11 @@ const DropDown = (props) => {
   })
 
   return (
-    <div className='conditions-box-child' id='left'>
+    <div id='left'>
           &nbsp;<select name={name} id={name}>
-            { addSelect(data)}
+            { 
+              addSelect(data)
+            }
           </select>
     </div>
   );

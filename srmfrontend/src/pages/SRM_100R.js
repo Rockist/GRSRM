@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
-
+import CustomFetch from '../components/CustomFetch';
 import TuiGrid from '../components/TuiGrid';
 import CustomDateRagePicker from '../components/CustomDateRagePicker';
 import Gubun from '../components/Gubun';
@@ -54,12 +54,26 @@ const SRM_100R = () => {
     userGroup: 'S',
   };
 
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080', 'api/SRM100R/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   // 검색
 
   return (
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM100R/list'} /> */}
-      <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM100R/list'} />
+      <NavBar searchCallBack={searchCallBack} />
 
       <div>
         <div className="conditions-wrapper">

@@ -4,6 +4,8 @@ import Gubun from '../components/Gubun';
 import TuiGrid from '../components/TuiGrid';
 import CustomDateRagePicker from '../components/CustomDateRagePicker';
 import NavBar from '../components/NavBar';
+import CustomFetch from '../components/CustomFetch';
+
 
 /**
  * 화면명 : 매출마감조회 (정현락)
@@ -44,6 +46,20 @@ const SRM_302R = () => {
     userGroup: 'S',
   };
 
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080','api/SRM302R/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   //저장버튼
   const handleSaveList = memo((e) => {
     e.preventDefault();
@@ -64,7 +80,7 @@ const SRM_302R = () => {
   return (
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM302R/list'} /> */}
-      <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM302R/list'} />
+      <NavBar searchCallBack={searchCallBack} setData={setData} />
       <div className="conditions-wrapper">
         <div className="conditions-box">
           <CustomDateRagePicker

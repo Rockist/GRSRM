@@ -6,7 +6,7 @@ import TuiGrid from '../../components/TuiGrid';
 import '../../css/PD/SRM_704W.css';
 import CustomFetch from '../../components/CustomFetch';
 import DropDown from '../../components/DropDown';
-import Modal from '../../components/Modal';
+import SRM704WModal from '../../components/SRM704WModal';
 
 /**
  * 화면명 : 원단부착라벨 발행내역 (류정훈)
@@ -79,37 +79,58 @@ const SRM_704W = (props) => {
       gridRef.current.getInstance().setWidth(width);
   })
 
-  const searchFormData = {
-    divCd: '01',
-    dtFrom: startDate,
-    dtTo: endDate,
-    purCustCd: '1000',
-    userGroup: 'S',
-  };
-
   const openModal = () => {
     setModalOpen(true);
-    setApi("api/Popup/SRM501Wpopup1");
+    setApi('api/Popup/SRM704Wpopup');
     setHeading("거래처팝업");
     setPopupNumber(1);
   }
 
   const rowCallBack = (rowData, pop) => {
     if(rowData !== null) {
-      switch(pop) {
-        case 1: 
-          document.getElementById('pop1_input').value = rowData.BP_CD;
-          document.getElementById('pop1_input_readonly').value = rowData.BP_NM;
-        break;
-        case 2: 
-          document.getElementById('pop2_input').value = rowData.ITEM_CD;
-          document.getElementById('pop2_input_readonly').value = rowData.ITEM_NM;
-        break;
-        default : break;
-      }
+       document.getElementById('pop1_input').value = rowData.ITEM_CD;
+       document.getElementById('pop1_input_readonly').value = rowData.ITEM_NM; 
     }
     setModalOpen(false);
   }
+
+  const searchCallBack = () => {
+    if(startDate > endDate) {
+      alert("날짜를 제대로 입력해주세요!");
+      return;
+    }
+
+    let itemCdValue = document.getElementById('pop1_input').value;
+    if(itemCdValue === "") {
+      alert("품목코드를 선택해주세요!");
+      return;
+    }
+
+    let type = document.getElementById('type');
+    let typeValue = type.options[type.selectedIndex].value; 
+    let division = document.getElementById('division');
+    let divisionValue = type.options[division.selectedIndex].value; 
+
+    CustomFetch('localhost:8080','api/SRM704W/list', {
+      divCd:'01',
+      orderDtFr:startDate,
+      orderDtTo:endDate,
+      itemCd:itemCdValue,
+      moldType:typeValue,
+      moldClass:divisionValue
+    })
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
 
   const closeModal = (value) => {
     setModalOpen(value);
@@ -117,17 +138,16 @@ const SRM_704W = (props) => {
 
   return (
     <div>
-      {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM202W/list'} /> */}
-      <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM202W/list'} />
-      <Modal 
+      <NavBar searchCallBack={searchCallBack} />
+      <SRM704WModal 
         open={modalOpen} 
         close={closeModal} 
-        header={heading} 
+        header={"품목팝업"} 
         api={api} 
         rowCallBack={rowCallBack}
         popupNumber={popupNumber}
         >
-      </Modal>
+      </SRM704WModal>
       <div>
         <div className="conditions-wrapper">
             <div className='grid-conditions-box-1'>
@@ -157,7 +177,7 @@ const SRM_704W = (props) => {
                 </div>
                 <div className="conditions-box-child" id='left'>
                     <div className='left'>
-                        <CustomDateRagePicker
+                      <CustomDateRagePicker
                         dateTitle={""}
                         startDate={startDate}
                         setStartDate={setStartDate}
@@ -171,7 +191,8 @@ const SRM_704W = (props) => {
                   </div>
                   <DropDown
                     data={drop1}
-                    name="type">
+                    name="type"
+                    >
                   </DropDown>
             </div>
             <div className='grid-conditions-box-3'>

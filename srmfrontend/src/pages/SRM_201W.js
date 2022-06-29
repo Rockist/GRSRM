@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
+import CustomFetch from '../components/CustomFetch';
 import CustomDateRagePicker from '../components/CustomDateRagePicker';
 import Gubun from '../components/Gubun';
 import TuiGrid from '../components/TuiGrid';
@@ -391,6 +392,22 @@ const SRM_201W = () => {
     dlvyNo: '',
   };
 
+  // 조회
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080', 'api/SRM201W/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+
   //저장
   const handleSaveList = (e) => {
     e.preventDefault();
@@ -432,9 +449,7 @@ const SRM_201W = () => {
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM201W/list'} /> */}
       <NavBar
-        searchFormData={searchFormData}
-        setData={setData}
-        searchUrl={'api/SRM201W/list'}
+        searchCallBack={searchCallBack}
         useAddRowHandler={useAddRowHandler}
       />
       <div>

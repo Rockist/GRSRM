@@ -4,6 +4,8 @@ import Gubun from '../components/Gubun';
 import TuiGrid from '../components/TuiGrid';
 import CustomDateRagePicker from '../components/CustomDateRagePicker';
 import NavBar from '../components/NavBar';
+import CustomFetch from '../components/CustomFetch';
+
 
 /**
  * 화면명 : 납품현황조회 (정현락)
@@ -78,12 +80,26 @@ const SRM_301R = () => {
     userGroup: 'S',
   };
 
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080','api/SRM301R/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   // 검색
 
   return (
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM301R/list'} data={data} /> */}
-      <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM301R/list'} data={data} />
+      <NavBar searchCallBack={searchCallBack} data={data} />
       <div className="conditions-wrapper">
         <div className="conditions-box">
           <CustomDateRagePicker

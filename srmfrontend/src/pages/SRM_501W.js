@@ -150,6 +150,20 @@ const SRM_501W = (props) => {
       .catch((error) => console.log(error));
   };
 
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080','api/SRM501W/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   //컬럼헤더
   useEffect(() => {
     fetch('http://localhost:8080/api/XM102W/list?divCd=01&menuId=SRM_501W')
@@ -200,7 +214,7 @@ const SRM_501W = (props) => {
   return (
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM501W/list'} /> */}
-      <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM501W/list'} />
+      <NavBar searchCallBack={searchCallBack} />
       <Modal 
         open={modalOpen} 
         close={closeModal} 

@@ -3,24 +3,12 @@ import CustomFetch from './CustomFetch';
 import React, { useEffect } from 'react';
 
 const NavBar = (props) => {
-  const { searchFormData, setData, searchUrl, useAddRowHandler, useSaveRowHandler, previewCallBack } = props;
+  const { searchFormData, setData, searchUrl, useAddRowHandler, useSaveRowHandler, previewCallBack, searchCallBack } = props;
 
   // 조회버튼 옵션
   const searchList = (e) => {
     e.preventDefault();
-    console.log('searchUrl', searchUrl);
-    console.log('searchFromData', searchFormData);
-    CustomFetch('localhost:8080', searchUrl, searchFormData)
-      .then((res) => {
-        console.log('결과 : ', res);
-        if (res.length === 0) {
-          setData([{}]);
-        } else {
-          setData(res);
-          console.log('결과 : ', res);
-        }
-      })
-      .catch((error) => console.log(error));
+    searchCallBack();
   };
 
   // 신규버튼

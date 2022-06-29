@@ -5,6 +5,8 @@ import Gubun from '../components/Gubun';
 import NavBar from '../components/NavBar';
 import PreviewPopup from '../components/PreviewPopup';
 import TuiGrid from '../components/TuiGrid';
+import CustomFetch from '../components/CustomFetch';
+
 
 /**
  * 화면명 : 원단부착라벨 발행내역 (정현락)
@@ -97,6 +99,21 @@ const SRM_203W = () => {
     userGroup: 'S',
   };
 
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080','api/SRM202W/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+
   //저장
   // const handleSaveList = (e) => {
   //   e.preventDefault();
@@ -122,7 +139,7 @@ const SRM_203W = () => {
   return (
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM202W/list'} /> */}
-      <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM202W/list'} previewCallBack={previewCallBack}/>
+      <NavBar searchCallBack={searchCallBack} previewCallBack={previewCallBack}/>
       { isOpen? (
         <div className='preview-box'>{
           previewData.map((data, index) => (

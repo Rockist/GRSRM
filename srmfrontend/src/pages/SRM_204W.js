@@ -40,6 +40,21 @@ const SRM_204W = () => {
       }
     }
   }
+  
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080','api/SRM204W/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
 
   // 콤보박스용
   // const [cmbEmp, setCmbEmp] = useState([
@@ -111,7 +126,7 @@ const SRM_204W = () => {
     return (
       <div>
         {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM204W/list'} /> */}
-        <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM204W/list'} previewCallBack={previewCallBack} />
+        <NavBar searchCallBack={searchCallBack} previewCallBack={previewCallBack} />
         <div>
           <div className="conditions-wrapper">
             <div className="conditions-box">

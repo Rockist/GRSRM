@@ -1,8 +1,9 @@
 package com.haesolinfo.srm.repository;
 
+import com.haesolinfo.srm.dao.srm704w.SRM704WPopupDao;
 import com.haesolinfo.srm.domain.BA_BIZ_PARTNER;
-import com.haesolinfo.srm.domain.BA_SUB_CD;
 import com.haesolinfo.srm.domain.PUR_CUST_CD_JOIN;
+import com.haesolinfo.srm.vo.srm704w.SRM704WPopupVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -30,7 +31,26 @@ public class PopupRepository {
         spq.setParameter("USER_CODE", user_code);
 
         spq.execute();
-        List resultList = spq.getResultList();
-        return resultList;
+        return spq.getResultList();
+    }
+
+    public List<SRM704WPopupDao> find704WPopup(SRM704WPopupVo vo) {
+        StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("SRM704WDto.USP_PU_ITEM");
+        spq.registerStoredProcedureParameter("DIV_CD", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("ACCT", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("CLASS", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("ITEM", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("ITEM_NM", String.class, ParameterMode.IN);
+        spq.registerStoredProcedureParameter("PROC_TP", String.class, ParameterMode.IN);
+
+        spq.setParameter("DIV_CD", vo.getDivCd());
+        spq.setParameter("ACCT", vo.getAcct());
+        spq.setParameter("CLASS", vo.getClAss());
+        spq.setParameter("ITEM", vo.getItem());
+        spq.setParameter("ITEM_NM", vo.getItemNm());
+        spq.setParameter("PROC_TP", vo.getProcTp());
+
+        spq.execute();
+        return spq.getResultList();
     }
 }

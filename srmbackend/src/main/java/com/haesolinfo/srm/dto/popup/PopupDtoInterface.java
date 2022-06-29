@@ -3,7 +3,7 @@ package com.haesolinfo.srm.dto.popup;
 import java.util.List;
 
 public interface PopupDtoInterface {
-    public boolean filter(String word);
+    default boolean filter(String word) { return false; }
 
     public List<PopupHeader> getHeaderList();
 

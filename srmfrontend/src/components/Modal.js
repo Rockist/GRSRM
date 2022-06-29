@@ -18,6 +18,7 @@ const Modal = (props) => {
       console.log("input : " + input);
       CustomFetch('localhost:8080', api, input+"")
       .then((res) => {
+        console.log(res);
         setColums(res.HEADER_LIST);
         setData(res.POPUP_LIST);
         setDataOpen(false);

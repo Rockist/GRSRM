@@ -4,6 +4,7 @@ import Gubun from '../components/Gubun';
 import TuiGrid from '../components/TuiGrid';
 import CustomDateRagePicker from '../components/CustomDateRagePicker';
 import NavBar from '../components/NavBar';
+import CustomFetch from '../components/CustomFetch';
 
 /**
  * 화면명 : 원단부착라벨 발행 (정현락)
@@ -66,6 +67,20 @@ const SRM_202W = () => {
     userGroup: 'S',
   };
 
+  const searchCallBack = () => {
+    CustomFetch('localhost:8080', 'api/SRM202W/list', searchFormData)
+      .then((res) => {
+        console.log('결과 : ', res);
+        if (res.length === 0) {
+          setData([{}]);
+        } else {
+          setData(res);
+          console.log('결과 : ', res);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   //저장
   // const handleSaveList = (e) => {
   //   e.preventDefault();
@@ -86,7 +101,7 @@ const SRM_202W = () => {
   return (
     <div>
       {/* <Header searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM202W/list'} /> */}
-      <NavBar searchFormData={searchFormData} setData={setData} searchUrl={'api/SRM202W/list'} />
+      <NavBar searchCallBack={searchCallBack} />
       <div>
         <div className="conditions-wrapper">
           <div className="conditions-box">
