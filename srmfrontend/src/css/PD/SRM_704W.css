@@ -1,23 +1,46 @@
 .conditions-wrapper {
     display: flex;
+    width: 100%;
+    padding-right: 70px;
+    place-items: center;
     justify-content: space-between;
+}
+
+.conditions-box-child {
+    display: flex;
+    place-items: center;
 }
 
 .grid-conditions-box-1 {
     display: grid;
     row-gap: 5px;
-    width: 22%;
     justify-items: start;
     grid-template-columns: 60px 1fr;
     grid-template-rows: 1fr 1fr;
 }
 
-.grid-conditions-box-1 > #right {
+#right {
     place-self: center end;
 }
-.grid-conditions-box-1 > #left {
-    place-self: start center;
+
+#left {
+    place-self: center start;
 } 
+
+.grid-conditions-box-2 {
+    display: grid;
+    row-gap: 5px;
+    justify-items: start;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.grid-conditions-box-3 {
+    display: grid;
+    row-gap: 5px;
+    justify-items: start;
+    grid-template-columns: 60px 1fr;
+}
 
 .mainContainer {
     height: 90vh;

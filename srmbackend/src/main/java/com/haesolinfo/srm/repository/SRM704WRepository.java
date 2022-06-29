@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class SRM704Repository {
+public class SRM704WRepository {
 
     private final EntityManager em;
 

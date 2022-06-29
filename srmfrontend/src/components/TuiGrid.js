@@ -43,7 +43,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
     
     switch (menu.COL_TYPE) {
       case '0':
-        console.log(0);
         cusCols.push({
           header: menu.COL_NM,
           name: menu.COL_ID,
@@ -55,7 +54,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
         });
         break;
       case '1':
-        console.log(1);
         cusCols.push({
           header: menu.COL_NM,
           name: menu.COL_ID,
@@ -69,8 +67,7 @@ const TuiGrid = React.forwardRef((props, ref) => {
           },
         });
         break;
-      case '2':
-        console.log(2);
+      case '7':
         cusCols.push({
           header: menu.COL_NM,
           name: menu.COL_ID,

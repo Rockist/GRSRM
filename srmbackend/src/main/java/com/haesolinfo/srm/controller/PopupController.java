@@ -33,4 +33,11 @@ public class PopupController {
         PopupDto<SRM501WPopDto2> popupDto = new PopupDto<>(result, new SRM501WPopDto2().getHeaderList());
         return new ResponseEntity<>(popupDto, HttpStatus.OK);
     }
+
+    @PostMapping("/api/Popup/SRM704Wpopup")
+    public ResponseEntity<?> get704WPopupData(@RequestBody String word) {
+        List<SRM501WPopDto2> result = popupService.find501WPopup2("S", "admin", word);
+        PopupDto<SRM501WPopDto2> popupDto = new PopupDto<>(result, new SRM501WPopDto2().getHeaderList());
+        return new ResponseEntity<>(popupDto, HttpStatus.OK);
+    }
 }

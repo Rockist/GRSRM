@@ -1,10 +1,6 @@
 import '../css/NavBar.css';
 import CustomFetch from './CustomFetch';
 import React, { useEffect } from 'react';
-import PreviewPopup from '../components/PreviewPopup';
-
-const modal = document.querySelector('#modal');
-const root = document.querySelector('#root');
 
 const NavBar = (props) => {
   const { searchFormData, setData, searchUrl, useAddRowHandler, useSaveRowHandler, previewCallBack } = props;
@@ -31,11 +27,6 @@ const NavBar = (props) => {
   const activeNewForm = (e) => {
     console.log('신규 버튼 클릭');
   };
-
-  useEffect(() => {
-    modal.style.display = 'none';
-    root.style.display = 'block';
-  });
 
   // 추가
   // const useAddRow = (e) => {

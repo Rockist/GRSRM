@@ -22,9 +22,16 @@ public class CmbItemsController {
     @CrossOrigin
     @PostMapping("/api/CmbItems/SubCd")
     public ResponseEntity<?> getSubCodeList(@RequestBody Map<String, String> str){
+        log.info(str.toString());
         List<CmbItemsDto> cmbItemList = cmbItemsService.findCmbList(str.get("COL_MCD"));
         return new ResponseEntity<>(cmbItemList, HttpStatus.OK);
+    }
 
+    @PostMapping("/api/CmbItems/SubSubCd")
+    public ResponseEntity<?> getSubCodeCodeList(@RequestBody  Map<String, String> mainCd) {
+        log.info("ddfdfdfdfd : " + mainCd.toString());
+        List<CmbItemsDto> cmbItemsDtoList = cmbItemsService.findCmbCmbList(mainCd.get("COL_MCD"));
+        return new ResponseEntity<>(cmbItemsDtoList, HttpStatus.OK);
     }
 
     @CrossOrigin

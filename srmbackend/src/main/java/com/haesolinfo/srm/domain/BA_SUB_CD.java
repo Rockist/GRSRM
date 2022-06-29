@@ -1,14 +1,21 @@
 package com.haesolinfo.srm.domain;
 
 import com.haesolinfo.srm.dto.pk.BASUBCDPK;
+import com.haesolinfo.srm.dto.pk.srm501w.SRM501WDtoSP1PK;
+import com.haesolinfo.srm.dto.srm501w.SRM501WDtoSP1;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedStoredProcedureQuery;
 
-@Entity
+@NamedStoredProcedureQuery(
+        name = "BASUBCD.SRM_USP_BA_SUB_CD",
+        procedureName = "SRM_USP_BA_SUB_CD",
+        resultClasses = BA_SUB_CD.class)
 @Data
+@Entity
 @IdClass(BASUBCDPK.class)
 public class BA_SUB_CD {
     @Id
@@ -16,11 +23,10 @@ public class BA_SUB_CD {
 
     @Id
     private String SUB_CD;
-
     private String SUB_NM;
-    private String SUB_NM_EN;
-    private String SUB_NM_CN;
-    private String SUB_NM_VN;
+    private String SUB_NM_CHN;
+    private String SUB_NM_VNM;
+    private String SUB_NM_ENG;
     private String USE_YN;
     private String TEMP_CD1;
     private String TEMP_CD2;
