@@ -75,7 +75,7 @@ const SRM_501W = (props) => {
   const download = (rowKey) => {
     console.log("rowKey : " + rowKey);
     var a = document.createElement("a");
-    a.href = "http://localhost:8080/api/SRM501W/file_download?" + new URLSearchParams({
+      a.href = "http://localhost:8080/api/SRM501W/file_download?" + new URLSearchParams({
       divCd : "01",
       fileNo : data.Grid2[rowKey].FILE_NO,
       fileName : data.Grid2[rowKey].FILE_NAME,
@@ -95,6 +95,7 @@ const SRM_501W = (props) => {
   const allDeleteClick = () => {
 
   }
+
 
   const buttonClick = (rowKey, text) => {
     switch(text) {

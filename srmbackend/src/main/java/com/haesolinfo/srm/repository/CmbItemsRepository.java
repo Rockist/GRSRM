@@ -20,7 +20,8 @@ public class CmbItemsRepository {
     private final EntityManager em;
 
     public List<BA_SUB_CD> findSubCode(String str) {
-        StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("BASUBCD.SRM_USP_BA_SUB_CD");
+        //SRM_USP_BA_SUB_CD
+        StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("BASUBCD.USP_BA_SUB_CD");
         spq.registerStoredProcedureParameter("MAIN_CD", String.class, ParameterMode.IN);
         spq.setParameter("MAIN_CD", str);
         spq.execute();

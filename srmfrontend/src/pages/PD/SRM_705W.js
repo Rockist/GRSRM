@@ -60,19 +60,49 @@ const SRM_705W = (props) => {
 
 
   const buttonClick = (rowKey, text) => {
-    switch(text) {
-      case "다운로드" : {
-        
-      }; break;
-      case "삭제" : {
+    // var form = document.createElement("form");
+    // form.setAttribute("charset", "UTF-8");
+    // form.setAttribute("method", "Post");  //Post 방식
+    // form.setAttribute("action", "/user/signup"); //요청 보낼 주소
 
-      } 
-      break;
-      case "열기" : 
-        console.log(3);
-      break;
-      default: break;
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "file");
+    hiddenField.setAttribute("name", "mName");
+    hiddenField.setAttribute("value", "몰라");
+    hiddenField.style.display = "none";
+    hiddenField.click();
+
+    hiddenField.onchange = (ev) => {
+      alert("rdfdf : " + ev);
     }
+
+    // const map = new Map();
+    // map.set('file', file);
+    // map.set('itemCd', itemCd);
+    // map.set('custCd', custCd);
+    // map.set('fileNo', fileNo);
+    // map.set('startDate', startDate);
+
+    // FileUploadFetch('localhost:8080', 'api/SRM501W/file_upload', map)
+    //         .then((res) => {
+    //            if(res === 0) {
+    //             CustomFetch('localhost:8080', 'api/SRM501W/sp2', {
+    //                 divCd: '01',
+    //                 custCd: custCd,
+    //                 itemCd: itemCd,
+    //               })
+    //                 .then((res) => {
+    //                   console.log('결과 : ', res);
+    //                   setData({ Grid1: [...data.Grid1], Grid2: [...res.Grid2] });
+    //                 })
+    //                 .catch((error) => console.log(error));
+    //            } 
+    //   })
+    //   .catch((error) => console.log(error));
+    // form.appendChild(hiddenField);
+
+    // document.body.appendChild(form);
+    // form.submit();
   }
 
   const fileDownload = () => {
@@ -192,7 +222,6 @@ const SRM_705W = (props) => {
               // cmbItems={cmbItems}
               onClick={() => {}}
               buttonClick={buttonClick}
-              uploadCheck={true}
             />
         </div>
       </div>

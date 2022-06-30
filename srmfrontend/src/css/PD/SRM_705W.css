@@ -23,7 +23,7 @@
     display: grid;
     row-gap: 5px;
     justify-items: start;
-    grid-template-columns: 60px 0.8fr 1fr;
+    grid-template-columns: 60px 0.9fr 1fr;
     grid-template-rows: 1fr;
 }
 

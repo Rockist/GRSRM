@@ -8,7 +8,7 @@ import CheckboxRenderer from './CheckboxRenderer';
 import CustomFetch from '../components/CustomFetch';
 
 const TuiGrid = React.forwardRef((props, ref) => {
-  const { columns, data, cmbItems, bodyHeight, width, height, onClick, buttonClick, selectOnly, uploadCheck } = props;
+  const { columns, data, cmbItems, bodyHeight, width, height, onClick, buttonClick, selectOnly } = props;
   const cusCols = [];
 
   //console.log('TuiGrid : ', data);
@@ -69,23 +69,24 @@ const TuiGrid = React.forwardRef((props, ref) => {
           },
         });
         break;
+      case '2':
+        cusCols.push({
+          header: menu.COL_NM,
+          name: menu.COL_ID,
+          minWidth: menu.COL_WIDTH,
+          valign: valign,
+          align: align,
+          hidden: colHidden,
+          renderer: {
+            type:  ButtonRenderer,
+            options: {
+              text: menu.COL_NM,
+              clickEvent : buttonClick
+            }
+          },
+        });
+        break;
       case '7':
-        if(uploadCheck) {
-          cusCols.push({
-            header: menu.COL_NM,
-            name: menu.COL_ID,
-            minWidth: menu.COL_WIDTH,
-            valign: valign,
-            align: align,
-            hidden: colHidden,
-            renderer: {
-              type:  FileUploadButton,
-              options: {
-                text: menu.COL_NM,
-              }
-            },
-          });
-        }else {
           cusCols.push({
             header: menu.COL_NM,
             name: menu.COL_ID,
@@ -101,7 +102,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
               }
             },
           });
-        }
         break;
       case '3':
         if(menu.COL_EDIT === 'Y') {
@@ -115,14 +115,14 @@ const TuiGrid = React.forwardRef((props, ref) => {
             colEdit,
           });
         } else {
-          CustomFetch('localhost:8080', 'api/CmbItems/SubCd', {
+          CustomFetch('localhost:8080', 'api/CmbItems/SubSubCd', {
             COL_MCD: menu.COL_MCD,
           })
             .then((data) => {
               console.log(data);
             })
             .catch((error) => console.log(error));
-          fetch('http://localhost:8080/192.168.0.201/api/CmbItems/SubSubCd', {
+          fetch('http://localhost:8080/api/CmbItems/SubSubCd', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
