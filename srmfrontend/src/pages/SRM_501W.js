@@ -73,6 +73,7 @@ const SRM_501W = (props) => {
   const [itemCd, setItemCd] = useState("");
 
   const download = (rowKey) => {
+    console.log("rowKey : " + rowKey);
     var a = document.createElement("a");
     a.href = "http://localhost:8080/api/SRM501W/file_download?" + new URLSearchParams({
       divCd : "01",
@@ -82,6 +83,17 @@ const SRM_501W = (props) => {
     })
     a.setAttribute("download", data.Grid2[rowKey].FILE_NAME);
     a.click();
+  }
+
+  const allDownClick = () => {
+    for(var i=0; i<data.Grid2.length; i++) {
+      if(!data.Grid2[i].CHK) continue;
+      console.log(data.Grid2[i]);
+    }
+  }
+
+  const allDeleteClick = () => {
+
   }
 
   const buttonClick = (rowKey, text) => {
@@ -155,6 +167,7 @@ const SRM_501W = (props) => {
       .then((res) => {
         console.log('결과 : ', res);
         if (res.length === 0) {
+          alert('데이터가 존재하지 않습니다.');
           setData([{}]);
         } else {
           setData(res);
@@ -264,7 +277,9 @@ const SRM_501W = (props) => {
         </div>
         <div className="right-container">
           <div className="content-wrapper">
-            <FileUploadForm 
+            <FileUploadForm
+              allDoClick={allDownClick}
+              allDeClick={allDeleteClick}
               itemCd={itemCd}
               custCd={custCd}
               setData={setData}

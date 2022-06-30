@@ -5,7 +5,7 @@ import CustDatePicker from '../components/CustDatePicker';
 import CustomFetch from '../components/CustomFetch';
 
 const FileUploadForm = (props) => {
-    const { itemCd, custCd, setData, data } = props;
+    const {itemCd, custCd, setData, data, allDoClick, allDeClick } = props;
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState("");
     const [startDate, setStartDate] = useState(new Date());
@@ -19,8 +19,18 @@ const FileUploadForm = (props) => {
         setFileName(file.name);
     }; 
 
+    const allDownClick = (ev) => {
+      ev.preventDefault();
+      allDoClick();
+    }
+
+    const allDeleteClick = (ev) => {
+      ev.preventDefault();
+      allDeClick();
+    }
+
     const onFileUpload = (ev) => {
-        ev.preventDefault() // 새로고침 안하게 막음. 
+        ev.preventDefault(); // 새로고침 안하게 막음. 
         if(file === null)  {
             alert('파일을 선택해주세요');
             return;
@@ -36,7 +46,15 @@ const FileUploadForm = (props) => {
        
         console.log(itemCd);
         console.log(custCd);
-        FileUploadFetch('localhost:8080', 'api/SRM501W/file_upload', file, itemCd, custCd, fileNo, startDate)
+        
+        const map = new Map();
+        map.set('file', file);
+        map.set('itemCd', itemCd);
+        map.set('custCd', custCd);
+        map.set('fileNo', fileNo);
+        map.set('startDate', startDate);
+
+        FileUploadFetch('localhost:8080', 'api/SRM501W/file_upload', map)
             .then((res) => {
                if(res === 0) {
                 CustomFetch('localhost:8080', 'api/SRM501W/sp2', {
@@ -81,27 +99,24 @@ const FileUploadForm = (props) => {
             </div>
             <div className="fileupload-form"> 
                 <form className='form' onSubmit={onFileUpload} >
-                    <button className="btn-upload" type='submit'>
+                    <button className="btn-file-upload" type='submit' id='upload'>
                         Upload
                     </button>
-                    <input className="txt-upload" type="text" value={fileName} readOnly></input>
+                    <input className="txt-upload-input" type="text" value={fileName} readOnly></input>
                     <input type="file" name="uploadfile" onChange={onFileChange} id="file" style={{display:'none'}}/>
-                    <label htmlFor="file" className="btn-upload" id='btn-file-choose'>
+                    <label htmlFor="file" className="btn-file-choose" id='btn-file-choose'>
                         파일선택
                     </label>
                 </form>
             </div>
             <div className="content-box-download">
-              <button className="btn-upload">
-                <span className="txt-btn-upload">일괄 다운</span>
+              <button className="btn-all-upload" onClick={allDownClick} >
+                일괄 다운
               </button>
               <button
-                className="btn-upload"
-                onClick={() => {
-                  window.print();
-                }}
-              >
-                <span className="txt-btn-upload">일괄 삭제</span>
+                className="btn-all-delete"
+                onClick={allDeleteClick}
+              > 일괄 삭제
               </button>
             </div>
       </div>

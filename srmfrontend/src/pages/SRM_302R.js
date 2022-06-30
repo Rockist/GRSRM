@@ -51,6 +51,7 @@ const SRM_302R = () => {
       .then((res) => {
         console.log('결과 : ', res);
         if (res.length === 0) {
+          alert('데이터가 존재하지 않습니다.');
           setData([{}]);
         } else {
           setData(res);

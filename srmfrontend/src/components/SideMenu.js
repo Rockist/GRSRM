@@ -16,16 +16,11 @@ const menuItems = [
     ],
   },
   {
-    name: '발주관리',
-    // to: '/SRM_100R',
-    iconClassName: 'bi bi-speedometer2',
-    subMenus: [{ name: '발주현황조회', to: '/SRM_100R' }],
-  },
-  {
     name: '납품관리',
     //to: '/content',
     iconClassName: 'bi bi-vector-pen',
     subMenus: [
+      { name: '발주현황조회', to: '/SRM_100R' },
       { name: '납품등록', to: '/SRM_201W' },
       { name: '원단부착라벨 발행', to: '/SRM_202W' },
       { name: '원단부착라벨 발행내역', to: '/SRM_203W' },
@@ -47,7 +42,7 @@ const menuItems = [
     iconClassName: 'bi bi-vector-pen',
     subMenus: [
       { name: '금형발주조회', to: '/SRM_704W' },
-      // { name: '금형견적등록', to: '/SRM_302R' },
+      { name: '금형견적등록', to: '/SRM_705W' },
       // { name: '금형납품등록', to: '/SRM_302R' },
       // { name: '금형매출마감조회', to: '/SRM_302R' },
     ],

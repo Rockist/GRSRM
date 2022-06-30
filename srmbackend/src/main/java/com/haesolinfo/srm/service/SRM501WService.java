@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -102,6 +103,7 @@ public class SRM501WService {
     }
 
     public Resource fileDownload(SRM501WFileDownVo vo) {
+        log.info("file vo : ddddd");
         List<SRM501WFileDownDto> resultList = srm501WRepository.fileDownload(vo);
         ByteArrayResource  resource = null;
         if(resultList.size() > 0) {
@@ -112,14 +114,17 @@ public class SRM501WService {
                 Files.write(path, data);
                 resource = new ByteArrayResource(Files.readAllBytes(path)); // 파일 resource 얻기
 
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(100000);
-                        Files.delete(path);
-                    } catch (InterruptedException | IOException e) {
-                        e.printStackTrace();
-                    }
-                }).start();
+                File file = new File(filePath + srmDto.getFILE_NAME());
+                if(file.exists()) {
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(100000);
+                            Files.delete(path);
+                        } catch (InterruptedException | IOException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
+                }
             }
             catch (IOException ex) {
                 ex.printStackTrace();

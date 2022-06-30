@@ -1,4 +1,4 @@
-.modal {
+.srm_704w_modal {
     display: none;
     position: absolute;
     top: 0;
@@ -9,7 +9,7 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.modal > section {
+.srm_704w_modal > section {
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
@@ -20,7 +20,7 @@
     overflow: hidden;
 }
 
-.modal>section>header {
+.srm_704w_modal>section>header {
     display: flex;
     place-items: center;
     justify-content: space-between;
@@ -28,11 +28,11 @@
     font-weight: 700;
 }
 
-.modal>section>header>span {
+.srm_704w_modal>section>header>span {
     margin-left: 10px;
 }
 
-.modal>section>header button {
+.srm_704w_modal>section>header button {
     align-self: flex-end;
     margin-right: 5px;
     height: 30px;
@@ -125,20 +125,20 @@
 }
 
 
-.modal>section>main {
+.srm_704w_modal>section>main {
     padding: 16px;
     border-bottom: 1px solid #dee2e6;
     border-top: 1px solid #dee2e6;
 }
 
-.modal>section>footer {
+.srm_704w_modal>section>footer {
     position: relative;
     width: 100%;
     height: 50px;
     text-align: right;
 }
 
-.modal>section>footer>button {
+.srm_704w_modal>section>footer>button {
     text-shadow: none;
     margin-top: 12px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -151,26 +151,26 @@
     font-size: 13px;
 }
 
-.modal.openModal {
+.srm_704w_modal.openModal {
     display: flex;
     align-items: center;
     /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-bg-show 0.3s;
 }
 
-.modal>section>footer>.submit {
+.srm_704w_modal>section>footer>.submit {
     margin-right: 10px;
 }
 
-.modal>section>footer>.close {
+.srm_704w_modal>section>footer>.close {
     margin-right: 10px;
 }
 
-.modal>section>header button:hover {
+.srm_704w_modal>section>header button:hover {
     color: #cddbed;
 }
 
-.modal>section>footer>button:hover {
+.srm_704w_modal>section>footer>button:hover {
     border-color: dodgerblue;
     background-color: cornflowerblue;
     transition: .5s;
@@ -186,27 +186,4 @@
     border-color: dodgerblue;
     background-color: cornflowerblue;
     transition: .5s;
-}
-
-
-@keyframes modal-show {
-    from {
-        opacity: 0;
-        margin-top: -50px;
-    }
-
-    to {
-        opacity: 1;
-        margin-top: 0;
-    }
-}
-
-@keyframes modal-bg-show {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }

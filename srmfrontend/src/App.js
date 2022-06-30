@@ -14,6 +14,7 @@ import SRM_501W from './pages/SRM_501W';
 import XM_101W from './pages/X/XM_101W';
 import PreviewPage from './pages/PreviewPage';
 import SRM_704W from './pages/PD/SRM_704W';
+import SRM_705W from './pages/PD/SRM_705W';
 
 function App() {
   const [inactive, setInactive] = useState(false);
@@ -52,6 +53,7 @@ function App() {
 
           {/********************** 금형 ***********************/}
           <Route path="/SRM_704W" element={<SRM_704W inActive={inactive}/>} />
+          <Route path="/SRM_705W" element={<SRM_705W inActive={inactive}/>} />
         </Routes>
       </div>
     </div>

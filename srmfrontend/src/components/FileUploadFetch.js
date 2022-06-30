@@ -1,12 +1,11 @@
 
-async function FileUploadFetch(host, path, file, itemCd, custCd, fileNo, startDate) {
+async function FileUploadFetch(host, path, map) {
     const url = `http://${host}/${path}`;
     const form = new FormData();
-    form.append('file', file);
-    form.append('itemCd', itemCd);
-    form.append('custCd', custCd);
-    form.append('fileNo', fileNo);
-    form.append('startDate', startDate);
+
+    for (const [key, value] of map) {
+      form.append(key, value);
+    }
     
     const options = { // spring boot 에서 자동으로 multipart 를 붙여주기때문에 없어도됨. 
       method: 'POST',

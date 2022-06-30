@@ -10,11 +10,55 @@
     justify-content: space-between;
 }
 
-.fileupload-form > .form > .txt-upload {
+.fileupload-form > .form > .txt-upload-input {
     flex: 1;
-    background-color: gray;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    border-style: none;
+    color: #1a75ec;
+    background-color: #cddbed;
 }
 
-.fileupload-form > .form > .btn-upload {
+.fileupload-form > .form > .btn-file-upload {
+    margin-right: 10px;
+    text-shadow: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 50px;
+    text-align: center;
+    border-color: #cddbed;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.fileupload-form > .form > .btn-file-choose {
+    border: 2px solid #cddbed;
     margin-left: 10px;
+    text-shadow: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 50px;
+    text-align: center;
+    border-color: #cddbed;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.content-box-download > .btn-all-upload , .content-box-download > .btn-all-delete {
+    margin-right: 10px;
+    text-shadow: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 80px;
+    text-align: center;
+    border-color: #cddbed;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.fileupload-form > .form > .btn-file-choose:hover, .fileupload-form > .form > .btn-file-upload:hover, 
+.content-box-download > .btn-all-upload:hover , .content-box-download > .btn-all-delete:hover {
+    border-color: dodgerblue;
+    background-color: cornflowerblue;
+    transition: .5s;
 }

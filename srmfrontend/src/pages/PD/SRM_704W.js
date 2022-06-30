@@ -9,7 +9,7 @@ import DropDown from '../../components/DropDown';
 import SRM704WModal from '../../components/SRM704WModal';
 
 /**
- * 화면명 : 원단부착라벨 발행내역 (류정훈)
+ * 화면명 : 금형발주조회 (류정훈)
  * 화면번호 : SRM_704W
  * @returns
  */
@@ -29,20 +29,6 @@ const SRM_704W = (props) => {
   const [heading, setHeading] = useState("");         // 모달 헤딩 
   const [api, setApi] = useState("");                 // 띄울 데이터 api
   const [popupNumber, setPopupNumber] = useState(0);  // 띄울 팝업 번호 
-
-   //콤보박스 데이터
-   const [cmbItems, setCmbItems] = useState({
-    REQ_USER_ID: [
-    
-    ],
-    REQ_TYPE:[{ text: '자재팀', value: '100' },],
-    PROC_CD:[{ text: '자재팀', value: '100' }],
-    MOLD_CLASS:[{ text: '자재팀', value: '100' },],
-    DRAW_NO:[{ text: '자재팀', value: '100' },],
-    MOLD_TYPE:[{ text: '자재팀', value: '100' },],
-    MAKER:[{ text: '자재팀', value: '100' },],
-    PUR_USER_ID:[{ text: '자재팀', value: '100' },],
-  });
 
   //컬럼헤더
   useEffect(() => {
@@ -102,8 +88,7 @@ const SRM_704W = (props) => {
 
     let itemCdValue = document.getElementById('pop1_input').value;
     if(itemCdValue === "") {
-      alert("품목코드를 선택해주세요!");
-      return;
+      itemCdValue = '%';
     }
 
     let type = document.getElementById('type');
@@ -122,6 +107,7 @@ const SRM_704W = (props) => {
       .then((res) => {
         console.log('결과 : ', res);
         if (res.length === 0) {
+          alert('데이터가 존재하지 않습니다.');
           setData([{}]);
         } else {
           setData(res);
@@ -189,11 +175,11 @@ const SRM_704W = (props) => {
                  <div className='conditions-box-child' id='right'>
                      타입 :&nbsp;
                   </div>
-                  <DropDown
-                    data={drop1}
-                    name="type"
-                    >
-                  </DropDown>
+                    <DropDown
+                      data={drop1}
+                      name="type"
+                      >
+                    </DropDown>
             </div>
             <div className='grid-conditions-box-3'>
               <div  className='conditions-box-child' id='right'>Division :&nbsp;</div>
@@ -219,12 +205,11 @@ const SRM_704W = (props) => {
         <div className='mainContainer'>
           <TuiGrid
             ref={gridRef}
-            columns={colHeader.filter((col) => col.MENU_TAB_NO === '1')}
+            columns={colHeader.filter((col) => col.MENU_TAB_NO === '2')}
             viewName={'PD_704W'}
             bodyHeight={"fitToParent"}
             data={data}
             selectOnly={true}
-            cmbItems={cmbItems}
             onClick={() => {}}
           />
         </div>

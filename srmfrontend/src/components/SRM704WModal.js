@@ -105,7 +105,7 @@ const SRM704WModal = (props) => {
 
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
-    <div className={open ? 'openModal modal' : 'modal'}>
+    <div className={open ? 'openModal srm_704w_modal' : 'srm_704w_modal'}>
       {open ? (
         <section>
           <header>

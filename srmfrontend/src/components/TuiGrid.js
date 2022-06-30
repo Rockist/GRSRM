@@ -3,10 +3,12 @@ import React from 'react';
 import 'tui-grid/dist/tui-grid.css';
 import '../css/TuiGrid.css';
 import ButtonRenderer from './ButtonRenderer';
+import FileUploadButton from './FileUploadButton';
 import CheckboxRenderer from './CheckboxRenderer';
+import CustomFetch from '../components/CustomFetch';
 
 const TuiGrid = React.forwardRef((props, ref) => {
-  const { columns, data, cmbItems, bodyHeight, width, height, onClick, buttonClick, selectOnly } = props;
+  const { columns, data, cmbItems, bodyHeight, width, height, onClick, buttonClick, selectOnly, uploadCheck } = props;
   const cusCols = [];
 
   //console.log('TuiGrid : ', data);
@@ -14,7 +16,6 @@ const TuiGrid = React.forwardRef((props, ref) => {
   const copyHeaders = [...columns]; //컬럼헤더 깊은복사
 
   copyHeaders.map((menu) => {
-    console.log("menu : " + menu);
     //세로정렬
     let valign = menu.COL_VA === '0' ? 'middle' : menu.COL_VA === '1' ? 'top' : 'bottom';
 
@@ -26,19 +27,20 @@ const TuiGrid = React.forwardRef((props, ref) => {
 
     //수정여부
     let colEdit = menu.COL_EDIT === 'Y' ? "editor: 'text'" : '';
+
     if (menu.COL_HIDDEN === 'Y') colHidden = true;
 
-    if(selectOnly) {
-      cusCols.push({
-        header: menu.COL_NM,
-        name: menu.COL_ID,
-        minWidth: menu.COL_WIDTH,
-        hidden: colHidden,
-        valign: valign,
-        align: align,
-        colEdit,
-      });
-    } else {
+    // if(selectOnly) {
+    //   cusCols.push({
+    //     header: menu.COL_NM,
+    //     name: menu.COL_ID,
+    //     minWidth: menu.COL_WIDTH,
+    //     hidden: colHidden,
+    //     valign: valign,
+    //     align: align,
+    //     colEdit,
+    //   });
+    // } else {
     //컬럽타입
     
     switch (menu.COL_TYPE) {
@@ -68,62 +70,84 @@ const TuiGrid = React.forwardRef((props, ref) => {
         });
         break;
       case '7':
-        cusCols.push({
-          header: menu.COL_NM,
-          name: menu.COL_ID,
-          minWidth: menu.COL_WIDTH,
-          valign: valign,
-          align: align,
-          hidden: colHidden,
-          renderer: {
-            type: ButtonRenderer,
-            options: {
-              text: menu.COL_NM,
-              clickEvent : buttonClick
-            }
-          },
-        });
+        if(uploadCheck) {
+          cusCols.push({
+            header: menu.COL_NM,
+            name: menu.COL_ID,
+            minWidth: menu.COL_WIDTH,
+            valign: valign,
+            align: align,
+            hidden: colHidden,
+            renderer: {
+              type:  FileUploadButton,
+              options: {
+                text: menu.COL_NM,
+              }
+            },
+          });
+        }else {
+          cusCols.push({
+            header: menu.COL_NM,
+            name: menu.COL_ID,
+            minWidth: menu.COL_WIDTH,
+            valign: valign,
+            align: align,
+            hidden: colHidden,
+            renderer: {
+              type:  ButtonRenderer,
+              options: {
+                text: menu.COL_NM,
+                clickEvent : buttonClick
+              }
+            },
+          });
+        }
         break;
       case '3':
-        console.log(3);
-        if (menu.COL_MCD === '') {
+        if(menu.COL_EDIT === 'Y') {
+          cusCols.push({
+            header: menu.COL_NM,
+            name: menu.COL_ID,
+            minWidth: menu.COL_WIDTH,
+            hidden: colHidden,
+            valign: valign,
+            align: align,
+            colEdit,
+          });
         } else {
-          // CustomFetch('localhost:8080', 'api/CmbItems/SubCd', {
-          //   COL_MCD: menu.COL_MCD,
-          // })
-          //   .then((data) => {
-          //     //setcmbItems(data);
-          //   })
-          //   .catch((error) => console.log(error));
-          // fetch('http://192.168.0.148:8080/api/CmbItems/SubCd', {
-          //   method: 'POST',
-          //   headers: { 'Content-Type': 'application/json' },
-          //   body: JSON.stringify({
-          //     COL_MCD: menu.COL_MCD,
-          //   }),
-          // })
-          //   .then((res) => res.json())
-          //   .then((res) => {
-          //     //setcmbItems(res);
-          //     console.log(res);
-          //   });
+          CustomFetch('localhost:8080', 'api/CmbItems/SubCd', {
+            COL_MCD: menu.COL_MCD,
+          })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => console.log(error));
+          fetch('http://localhost:8080/192.168.0.201/api/CmbItems/SubSubCd', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              COL_MCD: menu.COL_MCD,
+            }),
+          }).then((res) => res.json())
+            .then((res) => {
+              cusCols.push({
+                header: menu.COL_NM,
+                name: menu.COL_ID,
+                minWidth: menu.COL_WIDTH,
+                formatter: 'listItemText',
+                editor: {
+                  type: 'select',
+                  options: {
+                    listItems: res,
+                  },
+                },
+                hidden: colHidden,
+                valign: valign,
+                align: align,
+              });
+              console.log(res);
+            });
         }
-        //const listItems = cmbItems.map((item) => console.log(item));
-        cusCols.push({
-          header: menu.COL_NM,
-          name: menu.COL_ID,
-          minWidth: menu.COL_WIDTH,
-          formatter: 'listItemText',
-          editor: {
-            type: 'select',
-            options: {
-              listItems: cmbItems[menu.COL_ID],
-            },
-          },
-          hidden: colHidden,
-          valign: valign,
-          align: align,
-        });
         break;
       case '4':
         console.log(4);
@@ -156,7 +180,7 @@ const TuiGrid = React.forwardRef((props, ref) => {
         });
         break;
     }
-  }
+  // }
   });
 
   return (

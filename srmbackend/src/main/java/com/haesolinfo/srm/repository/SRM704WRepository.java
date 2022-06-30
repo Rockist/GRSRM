@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class SRM704WRepository {
 
     public List<SRM704WDto> findList(SRM704WVo vo) {
         log.info("SRM704WDto : " + vo.toString());
-        StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("SRM704W.USP_PD_703W_QUERY");
+        StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("SRM704W.USP_PD_703W_QUERY2");
         spq.registerStoredProcedureParameter("DIV_CD", String.class, ParameterMode.IN);
         spq.registerStoredProcedureParameter("ORDER_DT_FR", Date.class, ParameterMode.IN);
         spq.registerStoredProcedureParameter("ORDER_DT_TO", Date.class, ParameterMode.IN);
@@ -37,7 +38,6 @@ public class SRM704WRepository {
         spq.setParameter("MOLD_TYPE", vo.getMoldType());
         spq.setParameter("MOLD_CLASS", vo.getMoldClass());
         spq.execute();
-
         return (List<SRM704WDto>) spq.getResultList();
     }
 }

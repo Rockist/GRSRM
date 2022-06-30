@@ -1,4 +1,4 @@
-package com.haesolinfo.srm.dto.srm704w;
+package com.haesolinfo.srm.dto.srm705w;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,10 +15,10 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NamedStoredProcedureQuery(
-        name = "SRM704W.USP_PD_703W_QUERY2",
-        procedureName = "USP_PD_703W_QUERY2",
-        resultClasses = SRM704WDto.class)
-public class SRM704WDto {
+        name = "SRM705W.USP_SRM_705W_QUERY",
+        procedureName = "USP_SRM_705W_QUERY",
+        resultClasses = SRM705WDto.class)
+public class SRM705WDto {
     @JsonProperty("GU")
     private String GU;
     @Id
@@ -49,8 +49,6 @@ public class SRM704WDto {
     private String PROC_CD;
     @JsonProperty("REQ_QTY")
     private int REQ_QTY;
-    @JsonProperty("DRAW_NO")
-    private String DRAW_NO;
     @JsonProperty("MOLD_TYPE")
     private String MOLD_TYPE;
     @JsonProperty("ORDER_QTY")
@@ -67,4 +65,13 @@ public class SRM704WDto {
     private LocalDate IN_DATE;
     @JsonProperty("REMARK")
     private String REMARK;
+    @JsonProperty("OFFER_STATE")
+    private String OFFER_STATE;
+    @JsonProperty("OFFER_FILE_NAME")
+    private String OFFER_FILE_NAME;
+    @JsonProperty("OFFER_FILE_EXTENSION")
+    private String OFFER_FILE_EXTENSION;
+    @JsonProperty("INSERT_DT")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate INSERT_DT;
 }
